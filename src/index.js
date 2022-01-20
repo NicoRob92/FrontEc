@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import store from './ducks/store';
+import './sass/main.scss'
 
+
+import { Auth0Provider } from "@auth0/auth0-react";
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <Auth0Provider
+      domain="nicorobledo.us.auth0.com"
+      clientId="QxfsX7iCeiq3dv2l50vYK7djTBhMqymm"
+      redirectUri={window.location.origin}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+      </Auth0Provider>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

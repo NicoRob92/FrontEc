@@ -1,0 +1,29 @@
+@import '../../sass/variables.scss';
+
+.container {
+  display: flex;
+  background-color: #fff;
+  width: 25%;
+  justify-content: space-around;
+  border-radius: 38px;
+}
+
+.searchbar {
+  width: 95%;
+  display: flex;
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+  button {
+    border-radius: 38px;
+    background-color: transparent;
+    border: none;
+  }
+
+  button:focus {
+    border: none;
+    outline: none;
+  }
+}

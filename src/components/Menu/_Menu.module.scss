@@ -1,0 +1,19 @@
+@import '../../sass/variables.scss';
+
+.menu {
+  width: 10%;
+  background-color: $CPrimary;
+  color: $CFourth;
+  transition: 0.4s;
+  position: absolute;
+  top: 7%;
+  bottom: 0;
+  right: 0;
+  transform: translateX(0%);
+  outline: 1px solid;
+  overflow: hidden;
+  
+}
+.visible {
+    transform: translateX(100%);
+  }

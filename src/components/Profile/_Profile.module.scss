@@ -1,0 +1,25 @@
+.container {
+  width: 5%;
+  height: 70%;
+  display: flex;
+  overflow: hidden;
+}
+
+.profile {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;  
+
+}
+.pic {
+  width: 45%;
+  height: 95%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  margin: 0;
+}
