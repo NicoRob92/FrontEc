@@ -1,7 +1,28 @@
+@import '../../sass/variables.scss';
+
 .container {
   width: 100%;
-  height: auto;
+  height: 200vh; 
   display: flex;
+  background-color:#BA7659;
   flex-direction: column;
-  outline: 1px solid;
+  outline: 1px solid;  
+  align-items: center;
+}
+
+.separador{
+  width: 90%;
+  border:solid 1px
+}
+.carrousel{
+  width: 80%;
+  margin:5%;
+
+}
+
+.categories{
+  position: absolute;
+  border:solid 2px;
+  left:0;
+  bottom:-30%;
 }

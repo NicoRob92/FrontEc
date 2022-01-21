@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import style from './_Carrousel.module.scss';
-import Card from '../../components/Card/Card';
+import style from './_CarrouselOfertas.module.scss';
 
-export const Carrousel = ({ cards, arr }) => {
+export const CarrouselOfertas = ({ cards, arr }) => {
   const number = Number(cards);
   const [selectIndex, setselectIndex] = useState(0);
   const [selectedImage, setselectedImage] = useState(arr.slice(0, number));
@@ -46,15 +45,7 @@ export const Carrousel = ({ cards, arr }) => {
         </svg>
       </button>
 
-      {selectedImage.map((e) => (
-        <Card
-          key={e.name}
-          image={e.image}
-          title={e.name}
-          detail={e.detail}
-          price={e.price}
-        />
-      ))}
+      {selectedImage.map((e) => <img src={e} alt='empty'/>)}
       <button onClick={() => next()}>
         <svg
           width='41'

@@ -1,8 +1,7 @@
+import React, {useEffect} from 'react'
 import Categories from "../../containers/Categories/Categories"
 import Products from "../../containers/Products/Products"
-
 import style from "./_Market.module.scss"
-
 import faker from 'faker';
 
 let products = [];
@@ -28,7 +27,13 @@ let categories = [
   "Automotor",
 ]
 
+
 const Market = () => {
+  useEffect(()=>{
+    let element = document.getElementById('categories');
+    console.log(element)
+    element ? element?.classList.add(`${style.categories}`) : element?.classList.remove(`${style.categories}`)
+  })
   return (
     <div className={style.Market}>
       <Categories categories={categories}/>
