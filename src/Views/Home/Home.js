@@ -5,6 +5,7 @@ import { Carrousel } from '../../containers/Carrousel/Carrousel';
 import { CarrouselOfertas } from '../../containers/CarrouselOfertas/CarrouselOfertas';
 import Categories from '../../containers/Categories/Categories';
 import faker from 'faker';
+
 const Home = () => {
   let categories = [
     'Hogar',
@@ -58,9 +59,13 @@ const Home = () => {
       </div>
       <div>
         {/* posts */}
+
         <Categories categories={categories} />
       </div>
 
+    
+
+    
       {/* Footer */}
     </div>
   );
