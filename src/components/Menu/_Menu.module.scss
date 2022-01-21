@@ -17,3 +17,15 @@
 .visible {
     transform: translateX(100%);
   }
+
+@media screen and (min-width:$width-notebook){
+  .menu{
+    width:15vw;
+    height: 100vh;
+    top: 105%;
+    transform: translateX(200%)
+  }
+  .visible {
+    transform: translateX(6%);
+  }
+}

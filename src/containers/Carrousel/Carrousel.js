@@ -45,16 +45,17 @@ export const Carrousel = ({ cards, arr }) => {
           />
         </svg>
       </button>
-
-      {selectedImage.map((e) => (
-        <Card
-          key={e.name}
-          image={e.image}
-          title={e.name}
-          detail={e.detail}
-          price={e.price}
-        />
-      ))}
+      <div className={style.image}>
+        {selectedImage.map((e) => (
+          <Card
+            key={e.name}
+            image={e.image}
+            title={e.name}
+            detail={e.detail}
+            price={e.price}
+          />
+        ))}
+      </div>
       <button onClick={() => next()}>
         <svg
           width='41'

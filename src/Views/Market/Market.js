@@ -4,6 +4,7 @@ import Products from "../../containers/Products/Products"
 import style from "./_Market.module.scss"
 import faker from 'faker';
 
+
 let products = [];
 let i = 1;
 while (i <= 20) {
@@ -25,20 +26,22 @@ let categories = [
   "Electrodomesticos",
   "Indumentaria & calzado",
   "Automotor",
-]
+];
 
 
 const Market = () => {
+
   useEffect(()=>{
     let element = document.getElementById('categories');
     console.log(element)
     element ? element?.classList.add(`${style.categories}`) : element?.classList.remove(`${style.categories}`)
   })
+
   return (
     <div className={style.Market}>
-      <Categories categories={categories}/>
-      <Products products={products}/>
+      <Categories categories={categories} />
+      <Products products={products} />
     </div>
-  )
-}
-export default Market
+  );
+};
+export default Market;
