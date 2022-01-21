@@ -14,6 +14,7 @@ export default function CardItem ({image, title, details, price, id}){
         <div className={s.cardText}>
             {title.length < 17 ? <h5>{title}</h5>: <h5>{title.substring(0,17)}...</h5> }            
             <span className ={s.price}> ${price}</span>       
+        </div>
         </div>       
     </article>
     </NavLink>

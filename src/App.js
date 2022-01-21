@@ -5,8 +5,19 @@ import Market from './Views/Market/Market';
 import { Switch, Route } from 'react-router-dom';
 import CardDetail from './components/CardDetail/CardDetail'
 import FormNewPost from './components/FormNewPost/FormNewPost';
+import {useEffect} from "react"
+import { bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from "./ducks/actions/actionCreators"
 
-function App() {
+function App(props) {
+
+  useEffect(() => {
+    props.getProducts()
+    props.getCategories()
+    props.getCategoryProducts(1)
+  },[])
+
   return (
     <Switch>
       <Route exact path='/'>       
@@ -29,4 +40,8 @@ function App() {
   );
 }
 
-export default App;
+function mapDispatchToProps (dispatch){
+  return bindActionCreators(actionCreators,dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(App);
