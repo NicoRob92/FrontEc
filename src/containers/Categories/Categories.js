@@ -1,15 +1,14 @@
-import Categorie from "../../components/Categorie/Categorie"
+import Categorie from '../../components/Categorie/Categorie';
+import styles from './_Categories.module.scss';
 
-import styles from "./_Categories.module.scss"
-
-const Categories = ({categories}) => {
+const Categories = ({ categories }) => {  
   return (
-    <div id="categories" className={styles.categoriesContainer}>
-      {categories.map(e => (
-        <Categorie key={e} name={e}/>
+    <div  id='categories' className={styles.categoriesContainer}>
+      {categories.map((e) => (
+        <Categorie key={e} name={e} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;
