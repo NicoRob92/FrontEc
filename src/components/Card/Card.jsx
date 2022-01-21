@@ -9,7 +9,6 @@ export default function CardItem ({image, title, details, price, id}){
     return <NavLink to={"/"+id /*Cambiar ruta de ser necesario*/} className={s.link}>
     
     <article className={s.card}>
-        <div>
         <img src={image || defaultImage} className ={s.cardImg} />
         <div className={s.cardText}>
             {title.length < 17 ? <h5>{title}</h5>: <h5>{title.substring(0,17)}...</h5> }            
