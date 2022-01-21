@@ -1,5 +1,6 @@
 export const GET_PRODUCTS = "GET_PRODUCTS"
 export const GET_CATEGORIES= "GET_CATEGORIES"
 export const GET_POSTS ="GET_POSTS"
+export const GET_USERS ="GET_USERS"
 
 export const GET_CATEGORY_PRODUCTS = "GET_CATEGORY_PRODUCTS"

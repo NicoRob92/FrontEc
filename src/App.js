@@ -15,7 +15,7 @@ function App(props) {
   useEffect(() => {
     props.getProducts()
     props.getCategories()
-    props.getCategoryProducts(1)
+    props.getUsers()
   },[])
 
   return (

@@ -5,7 +5,7 @@ const api ="http://localhost:4000/api/"
 const getProductsUrl = api + "products"
 const getPostsUrl = api + "Post"
 const getCategoriesUrl = api + "category"
-
+const getUsersUrl = api+"users"
 
 export function getProducts() {
     return function(dispatch) {
@@ -55,6 +55,17 @@ export function getPosts() {
     };
 }
 
+export function getUsers() {
+    return function(dispatch) {
+      dispatch({ type: "LOADING", payload: "users" });
+      return fetch(getUsersUrl)
+          .then(response => response.json())
+          .then(json => {                   
+              dispatch({ type: actionTypes.GET_USERS, payload: json });                      
+          })
+          .catch(e=>console.error(e))
+    };
+}
 
 export function getCategoryProducts(categoryId){
     return {type: actionTypes.GET_CATEGORY_PRODUCTS, payload:categoryId}

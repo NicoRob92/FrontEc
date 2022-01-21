@@ -5,6 +5,7 @@ const initialState = {
   categories: [],
   categoryProducts:[],
   posts: [],
+  users:[]
 };
 
 export default function Product(state = initialState, action) {
@@ -18,13 +19,19 @@ export default function Product(state = initialState, action) {
     case actionTypes.GET_POSTS:
       return { ...state, posts: action.payload };
 
+    case actionTypes.GET_USERS:
+      return { ...state, users: action.payload };
+  
+
     case actionTypes.GET_CATEGORY_PRODUCTS:
       return {...state, 
         categoryProducts:state.products
         .filter(product=>product.categoryId==action.payload)
       }
+
     case "LOADING":
       return {...state, [action.payload]:["loading"]}
+
     default:
       return state;
   }
