@@ -22,18 +22,12 @@ const Home = () => {
     array.push({
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
-      image: faker.image.people(),
+      image: faker.image.image(350,350,true),
     });
     i++;
   }
 
-  const images = [];
-  let x = 1;
-  while (x <= 20) {
-    images.push(faker.image.animals())
-    x++;
-  }
-
+  const images = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   useEffect(() => {
     let element = document.getElementById('categories');
@@ -55,17 +49,17 @@ const Home = () => {
 
       <div className={style.carrousel}>
         {/* Carousel  component */}
+        <h1>Productos Destacados</h1>
         <Carrousel cards='4' arr={array} />
       </div>
-      <div>
-        {/* posts */}
+      <span className={style.separador}></span>
 
-        <Categories categories={categories} />
+      <div className={style.carrousel}>
+        {/* Carousel  component */}
+        <h1>Subastas Destacadas</h1>
+        <Carrousel cards='4' arr={array} />
       </div>
 
-    
-
-    
       {/* Footer */}
     </div>
   );

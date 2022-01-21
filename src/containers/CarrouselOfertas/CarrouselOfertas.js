@@ -45,7 +45,7 @@ export const CarrouselOfertas = ({ cards, arr }) => {
         </svg>
       </button>
 
-      {selectedImage.map((e) => <img src={e} alt='empty'/>)}
+      {selectedImage.map((e) => <img src={require(`../../Assets/${e}.jpg`)} alt='empty'/>)}
       <button onClick={() => next()}>
         <svg
           width='41'
