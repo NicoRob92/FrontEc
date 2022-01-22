@@ -1,9 +1,11 @@
-import Categories from "../../containers/Categories/Categories"
-import Products from "../../containers/Products/Products"
+import Categories from "../../containers/Categories/Categories";
+import Products from "../../containers/Products/Products";
 
-import style from "./_Market.module.scss"
+import { MarketProvider } from "../../context/MarketContext";
 
-import faker from 'faker';
+import style from "./_Market.module.scss";
+
+import faker from "faker";
 
 let products = [];
 let i = 1;
@@ -19,21 +21,14 @@ while (i <= 20) {
   i++;
 }
 
-let categories = [
-  "Hogar",
-  "Tecnologia",
-  "Computacion",
-  "Electrodomesticos",
-  "Indumentaria & calzado",
-  "Automotor",
-]
-
 const Market = () => {
   return (
-    <div className={style.Market}>
-      <Categories categories={categories}/>
-      <Products products={products}/>
-    </div>
-  )
-}
-export default Market
+    <MarketProvider>
+      <div className={style.Market}>
+        <Categories/>
+        <Products products={products} />
+      </div>
+    </MarketProvider>
+  );
+};
+export default Market;
