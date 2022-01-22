@@ -1,4 +1,5 @@
 import { Component } from "react"
+import validate from "./Validation"
 
 export default class FormProductDetail extends Component {
     continues = (e) => {
