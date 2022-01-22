@@ -1,11 +1,11 @@
-import * as actionTypes from "../actions/actionTypes"
+import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   products: [],
   categories: [],
-  categoryProducts:[],
+  categoryProducts: [],
   posts: [],
-  users:[]
+  users: [],
 };
 
 export default function Product(state = initialState, action) {
@@ -21,17 +21,16 @@ export default function Product(state = initialState, action) {
 
     case actionTypes.GET_USERS:
       return { ...state, users: action.payload };
-  
 
     case actionTypes.GET_CATEGORY_PRODUCTS:
-      return {...state, 
-        categoryProducts:state.products
-        .filter(product=>product.categoryId==action.payload)
-      }
-
-    case "LOADING":
-      return {...state, [action.payload]:["loading"]}
-
+      return {
+        ...state,
+        categoryProducts: state.products.filter(
+          (product) => product.categoryId === action.payload
+        ),
+      };
+    // case "LOADING":
+    //   return {...state, [action.payload]:["loading"]}
     default:
       return state;
   }

@@ -27,11 +27,11 @@ while (i <= 20) {
 }
 
 
-const Market = () => {
+const Market = (props) => {
+  console.log(props)
 
   useEffect(()=>{
     let element = document.getElementById('categories');
-    console.log(element)
     element ? element?.classList.add(`${style.categories}`) : element?.classList.remove(`${style.categories}`)
   })
 
@@ -39,8 +39,8 @@ const Market = () => {
 
     <MarketProvider>
       <div className={style.Market}>
-        <Categories/>
-        <Products products={products} />
+        <Categories categories={props.categories}/>
+        <Products products={props.products} />
       </div>
     </MarketProvider>
 
