@@ -9,7 +9,6 @@ import style from "./_Market.module.scss";
 import faker from "faker";
 
 import React, {useEffect} from 'react'
-import Categories from "../../containers/Categories/Categories"
 
 
 
