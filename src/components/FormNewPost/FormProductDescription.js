@@ -48,7 +48,7 @@ export default class FormProductDescription extends Component {
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text">$</span>
-                    <input type="text" className="form-control" name="price" defaultValue={values.price} onChange={handleChange('price')} />
+                    <input type="number" className="form-control" name="price" defaultValue={values.price} onChange={handleChange('price')} />
                 </div>
                 <button className="btn btn-primary" onClick={this.continues}>Continue</button>
                 <button className="btn btn-light" onClick={this.back}>Back</button>
