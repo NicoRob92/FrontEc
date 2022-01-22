@@ -1,8 +1,16 @@
+
+import Categories from "../../containers/Categories/Categories";
+import Products from "../../containers/Products/Products";
+
+import { MarketProvider } from "../../context/MarketContext";
+
+import style from "./_Market.module.scss";
+
+import faker from "faker";
+
 import React, {useEffect} from 'react'
 import Categories from "../../containers/Categories/Categories"
-import Products from "../../containers/Products/Products"
-import style from "./_Market.module.scss"
-import faker from 'faker';
+
 
 
 let products = [];
@@ -19,15 +27,6 @@ while (i <= 20) {
   i++;
 }
 
-let categories = [
-  "Hogar",
-  "Tecnologia",
-  "Computacion",
-  "Electrodomesticos",
-  "Indumentaria & calzado",
-  "Automotor",
-];
-
 
 const Market = () => {
 
@@ -38,10 +37,14 @@ const Market = () => {
   })
 
   return (
-    <div className={style.Market}>
-      <Categories categories={categories} />
-      <Products products={products} />
-    </div>
+
+    <MarketProvider>
+      <div className={style.Market}>
+        <Categories/>
+        <Products products={products} />
+      </div>
+    </MarketProvider>
+
   );
 };
 export default Market;
