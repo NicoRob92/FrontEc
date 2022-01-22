@@ -31,7 +31,6 @@ const Home = () => {
 
   useEffect(() => {
     let element = document.getElementById('categories');
-    console.log(element);
     element
       ? element?.classList.add(`${style.categories}`)
       : element?.classList.remove(`${style.categories}`);

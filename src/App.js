@@ -1,47 +1,46 @@
-import './App.css';
-import Navbar from './containers/Navbar/Navbar';
-import Home from './Views/Home/Home';
-import Market from './Views/Market/Market';
-import { Switch, Route } from 'react-router-dom';
-import CardDetail from './components/CardDetail/CardDetail'
-import FormNewPost from './components/FormNewPost/FormNewPost';
-import {useEffect} from "react"
-import { bindActionCreators} from 'redux';
-import { connect } from 'react-redux';
-import * as actionCreators from "./ducks/actions/actionCreators"
+import Navbar from "./containers/Navbar/Navbar";
+import Home from "./Views/Home/Home";
+import Market from "./Views/Market/Market";
+import CardDetail from "./components/CardDetail/CardDetail";
+import FormNewPost from "./components/FormNewPost/FormNewPost";
 
-function App(props) {
+import { useEffect, useState } from "react";
+import { Switch, Route } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import * as actionCreators from "./ducks/actions/actionCreators";
+
+import "./App.css";
+
+export default function App() {
+  const categories = useSelector((state) => state.reducer.categories);
+  const products = useSelector((state) => state.reducer.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getProducts()
-    props.getCategories()
-    props.getUsers()
-  },[])
+    dispatch(actionCreators.getCategories());
+    dispatch(actionCreators.getProducts());
+  }, [dispatch]);
 
   return (
     <Switch>
-      <Route exact path='/'>       
-        <Navbar/>
-        <Home/>
-      </Route>
-      <Route exact path='/market'>
+      <Route exact path="/">
         <Navbar />
-        <Market />
+        <Home />
       </Route>
-      <Route exact path='/card'>
+      <Route exact path="/market">
+        <Navbar />
+        <Market categories={categories} products={products}/>
+      </Route>
+      <Route exact path="/card">
         <Navbar />
         <CardDetail />
       </Route>
-      <Route exact path='/new-post'>
+      <Route exact path="/new-post">
         <Navbar />
         <FormNewPost />
       </Route>
-      </Switch>
+    </Switch>
   );
 }
-
-function mapDispatchToProps (dispatch){
-  return bindActionCreators(actionCreators,dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(App);
