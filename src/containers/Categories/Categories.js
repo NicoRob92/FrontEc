@@ -1,3 +1,4 @@
+
 import { useContext, useEffect } from "react"
 
 import Categorie from "../../components/Categorie/Categorie"
@@ -19,9 +20,10 @@ const Categories = () => {
       {/* <input type='button' onClick={fetchData}></input> */}
       {categories?.map(e => (
         <Categorie key={e.name} name={e.name}/>
+
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

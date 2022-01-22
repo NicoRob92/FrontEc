@@ -2,15 +2,13 @@
 
 .container{
     min-width: 100%;
-    height: 100%;    
+    height: 300px;    
     display: flex;    
-    align-items:center;
-    align-content: center;
-    justify-content:center;
     
     img{
         width:100%;
         height:100%;
+        outline: 4px solid black;
     }
     button{
         align-self: center;
@@ -27,11 +25,4 @@
         transition:.2s;
     }
       
-}
-.image{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    align-content: center;
-    border:1px solid ;
 }

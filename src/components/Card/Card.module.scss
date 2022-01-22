@@ -1,45 +1,47 @@
-.card{
-
-    width: 420px;
-    height: 350px;
-    left: 39px;
-    top: 583px;
-    display: flex;
-
-    align-items: center;
-    flex-direction: column;
-    background: #C4C4C4;
-    border-radius: 30px;
-    transition: all ease 0.2s;
-
+.card {
+  min-width: 85%;
+  width:85%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #c4c4c4;
+  border-radius: 15px;
+  transition: all ease 0.2s;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  margin-left: 7%;
 }
-.card img{
-    border-radius: 30px;
+.link {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  transition: all 0.3s ease;
+}
+.link:hover {
+  color: black;
+}
+.card img {
+  min-width: 300px;
+  min-height: 350px;
+  border-radius: 15px;
 }
 .cardText {
-    margin-top: 10px;
-    text-align: left;
-    margin-left: 15px;
-    font-family:"Roboto";
-    font-size: 24px;
-    font-weight:400
+  width: 90%;
+  text-align: left;
+  font-family: 'Roboto';
+  font-size: 1rem;
+  font-weight: 400;
 }
-.cardText span{
-    font-size: 18px;
-}
-.details{
-    width: 70%;
-}
-.price{
-    margin-left: 10%;
-}
+
 .cardImg {
-    width: 420px;
-    height:240px;
-    object-fit: cover;
-  }
-  .card:hover {
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-    transform: scale(1.01);
-    cursor: pointer;
-  }
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  max-height: 70%;
+  width: 100%;
+  object-fit: cover;
+}
+.card:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+  cursor: pointer;
+  background-color: rgb(223, 221, 221);
+}
