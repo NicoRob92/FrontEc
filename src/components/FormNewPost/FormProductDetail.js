@@ -1,20 +1,24 @@
+import { Component } from "react"
 
-const FormProductDetail = ({ newStep, handleChange, values }) => {
-    const continues = e => {
+export default class FormProductDetail extends Component {
+    continues = (e) => {
         e.preventDefault()
-        newStep()
+        this.props.nextStep()
     }
 
-    return (
-        <form>
-            <div className="mb-3">
-                <label className="form-label">Title</label>
-                <input type="text" className="form-control" onChange={e=>handleChange(e)} defaultValue={values.title} />
-                <div className="form-text">This will be the title, please indicate product, brand and model, ex. Google Pixel 6 Pro 128GB white</div>
-            </div>
-            <button type="submit" className="btn btn-primary" onClick={continues}>Submit</button>
-        </form>
-    )
+    render() {
+        const { values, handleChange } = this.props
+        return (
+            <form>
+                <div className="mb-3">
+                    <label className="form-label">Title</label>
+                    <input type="text" className="form-control" name="title" defaultValue={values.title} onChange={handleChange('title')} />
+                    <div className="form-text">This will be the title, please indicate product, brand and model, ex. Google Pixel 6 Pro 128GB white</div>
+                </div>
+                <button className="btn btn-primary" onClick={this.continues}>Continue</button>
+            </form>
+        )
+    }
 }
 
-export default FormProductDetail;
+
