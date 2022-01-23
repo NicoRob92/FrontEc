@@ -7,7 +7,7 @@ import Post from '../../containers/Post/Post';
 import Categories from '../../containers/Categories/Categories';
 import styles from './_Search.module.scss';
 import * as actionsCreators from '../../ducks/actions/actionCreators';
-
+import NotFound from '../../components/NotFound/NotFound';
 const Search = () => {
   const { product } = useParams();
   const state = useSelector((state) => state.reducer.categories);
@@ -71,7 +71,7 @@ const Search = () => {
         setCategoriesToFilter={setCategoriesToFilter}
         chosenCategories={chosenCategories}
       />
-      <Post array={filter} />
+      {filter?.length > 0 ? <Post array={filter} /> : <NotFound/>}
     </div>
   );
 };
