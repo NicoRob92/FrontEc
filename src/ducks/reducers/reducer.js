@@ -7,6 +7,7 @@ const initialState = {
   categoryProducts: [],
   posts: [],
   users: [],
+  countries:[],
   filteredProductsByCategory: [],
 };
 
@@ -23,6 +24,9 @@ export default function Product(state = initialState, action) {
 
     case actionTypes.GET_USERS:
       return { ...state, users: action.payload };
+
+    case actionTypes.GET_COUNTRIES:
+      return { ...state, countries: action.payload };
 
     case actionTypes.GET_CATEGORY_PRODUCTS:
       return {

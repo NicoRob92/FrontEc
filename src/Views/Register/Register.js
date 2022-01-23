@@ -1,14 +1,19 @@
 import { useState } from "react"
 import style from "./Register.module.scss"
 import { NavLink } from "react-router-dom"
+import { connect } from "react-redux"
 
-export default function Register ( ){
+function Register (props){
 
     const [data, setData]= useState({})
     const [isSend, setIsSend]= useState(false)
 
     const onSubmit = e=>{
 
+        const countryObject = props.countries.find(e=>{
+            return e.name.toLowerCase().includes(data.country.toLowerCase())
+        })
+        
         console.log("si")
         e.preventDefault()
         fetch("http://localhost:4000/api/register", {
@@ -18,7 +23,7 @@ export default function Register ( ){
             'Content-Type': 'application/json'
         },
 
-            body: JSON.stringify(data)
+            body: JSON.stringify({...data, country:countryObject.id})
           })
         .then(()=>{
             setData({})
@@ -122,3 +127,7 @@ export default function Register ( ){
         
     )
 }
+const mapStateToProps = (state)=>{
+    return {countries: state.reducer.countries}
+}
+export default connect (mapStateToProps, null)(Register)
