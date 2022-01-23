@@ -1,9 +1,9 @@
 import React, { useEffect , useState } from 'react';
 import { useSelector } from 'react-redux';
-import style from './_Home.module.scss';
+import styles from './_Home.module.scss';
 import { Carrousel } from '../../containers/Carrousel/Carrousel';
 import { CarrouselOfertas } from '../../containers/CarrouselOfertas/CarrouselOfertas';
-
+import {Link} from 'react-router-dom'
 const Home = ({product}) => {
   
   const [products,setproducts] = useState()
@@ -13,8 +13,8 @@ const Home = ({product}) => {
   useEffect(() => {
     let element = document.getElementById('categories');
     element
-      ? element?.classList.add(`${style.categories}`)
-      : element?.classList.remove(`${style.categories}`);
+      ? element?.classList.add(`${styles.categories}`)
+      : element?.classList.remove(`${styles.categories}`);
     
      
   });
@@ -26,25 +26,32 @@ const Home = ({product}) => {
   
 
   return (
-    <div className={style.container}>
+    <div className={styles.container}>
       {/* Navbar */}
 
-      <div className={style.carrousel}>
+      <div className={styles.carrousel}>
         {/* Carousel  component */}
         <CarrouselOfertas cards='1' arr={images} />
       </div>
-      <span className={style.separador}></span>
+      <span className={styles.separador}></span>
 
-      <div className={style.carrousel}>
+      <div className={styles.carrousel}>
         {/* Carousel  component */}
+        <div className={styles.productos}>
         <h1>Productos Destacados</h1>
+        <Link to='/market'>Ver todos</Link>
+        </div>
         <Carrousel cards='4' arr={products} />
       </div>
-      <span className={style.separador}></span>
+      <span className={styles.separador}></span>
 
-      <div className={style.carrousel}>
+      <div className={styles.carrousel}>
         {/* Carousel  component */}
+        
+        <div className={styles.productos}>
         <h1>Subastas Destacadas</h1>
+        <Link to='/market'>Ver todos</Link>
+        </div>
         <Carrousel cards='4' arr={products} />
       </div>
 
