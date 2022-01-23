@@ -3,9 +3,11 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   products: [],
   categories: [],
+  chosenCategories: [],
   categoryProducts: [],
   posts: [],
   users: [],
+  filteredProductsByCategory: [],
 };
 
 export default function Product(state = initialState, action) {
@@ -29,6 +31,31 @@ export default function Product(state = initialState, action) {
           (product) => product.categoryId === action.payload
         ),
       };
+    case actionTypes.CHOOSE_CATEGORIES:
+
+      if 
+      (action.info === "add category") {
+        return {
+          ...state,
+          chosenCategories: [...state.chosenCategories, action.payload],
+        };
+      } 
+
+      else if (action.info === "remove category") {
+        return {
+          ...state,
+          chosenCategories: state.chosenCategories.filter((e, i) => i !== action.index)
+          // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
+        };
+      }
+      break;
+
+    // case actionTypes.FILTER_PRODUCTS_BY_CATEGORY:
+    //   return {
+    //     ...state,
+    //     filteredProductsByCategory: state.products.filter(e => e)
+
+    //   }
     // case "LOADING":
     //   return {...state, [action.payload]:["loading"]}
     default:

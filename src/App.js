@@ -4,18 +4,15 @@ import Market from "./Views/Market/Market";
 import CardDetail from "./components/CardDetail/CardDetail";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { useSelector, useDispatch } from "react-redux";
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
 
-export default function App() {
-  const categories = useSelector((state) => state.reducer.categories);
-  const products = useSelector((state) => state.reducer.products);
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,23 +21,24 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <Switch>
-      <Route exact path="/">
-        <Navbar />
-        <Home />
-      </Route>
-      <Route exact path="/market">
-        <Navbar />
-        <Market categories={categories} products={products}/>
-      </Route>
-      <Route exact path="/card">
-        <Navbar />
-        <CardDetail />
-      </Route>
-      <Route exact path="/new-post">
-        <Navbar />
-        <FormNewPost />
-      </Route>
-    </Switch>
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/market">
+          <Market />
+        </Route>
+        <Route exact path="/card">
+          <CardDetail />
+        </Route>
+        <Route exact path="/new-post">
+          <FormNewPost />
+        </Route>
+      </Switch>
+    </>
   );
-}
+};
+
+export default App;
