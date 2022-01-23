@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
+import Register from "./Views/Register/Register";
 
 export default function App() {
   const categories = useSelector((state) => state.reducer.categories);
@@ -36,6 +37,10 @@ export default function App() {
       <Route exact path="/card">
         <Navbar />
         <CardDetail />
+      </Route>
+      <Route exact path="/register">
+        <Navbar />
+        <Register/>
       </Route>
       <Route exact path="/new-post">
         <Navbar />
