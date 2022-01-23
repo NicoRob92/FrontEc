@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes"
 
+
 const api ="http://localhost:4000/api/"
 
 const getProductsUrl = api + "products"
@@ -79,6 +80,22 @@ export function getUsers() {
           })
           .catch(e=>console.error(e))
     };
+}
+export function chooseCategories(category,info,index) {
+    console.log(category,info)
+    return {
+        type: actionTypes.CHOOSE_CATEGORIES,
+        payload: category,
+        info,
+        index
+    }
+}
+
+export function filterProductsByCategory (category) {
+    return {
+        type: actionTypes.FILTER_PRODUCTS_BY_CATEGORY,
+        payload: category
+    }
 }
 
 export function getCategoryProducts(categoryId){

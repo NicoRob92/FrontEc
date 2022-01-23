@@ -1,49 +1,81 @@
-
 import Categories from "../../containers/Categories/Categories";
 import Products from "../../containers/Products/Products";
+import Paginate from "../../containers/Paginate/Paginate";
 
-import { MarketProvider } from "../../context/MarketContext";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { getPages } from "../../helpers/getPages";
+import { getProductsToShow } from "../../helpers/getProductsToShow";
+
+import * as actionsCreators from "../../ducks/actions/actionCreators";
 
 import style from "./_Market.module.scss";
 
-import faker from "faker";
+// import faker from "faker";
 
-import React, {useEffect} from 'react'
-
-
-
-let products = [];
-let i = 1;
-while (i <= 20) {
-  products = [
-    ...products,
-    {
-      name: faker.commerce.productName(),
-      price: faker.commerce.price(),
-      image: faker.image.people(),
-    },
-  ];
-  i++;
-}
+const Market = () => {
+  const categories = useSelector((state) => state.reducer.categories);
+  const products = useSelector((state) => state.reducer.products);
+  const chosenCategories = useSelector((state) => state.reducer.chosenCategories)
+  const dispatch = useDispatch();
 
 
-const Market = (props) => {
-  console.log(props)
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [chosenCategories, setChosenCategories] = useState([]);
+  const productsPerPage = 20;
 
-  useEffect(()=>{
-    let element = document.getElementById('categories');
-    element ? element?.classList.add(`${style.categories}`) : element?.classList.remove(`${style.categories}`)
-  })
+  useEffect(() => {
+    let element = document.getElementById("categories");
+    element
+      ? element?.classList.add(`${style.categories}`)
+      : element?.classList.remove(`${style.categories}`);
+  }, []);
+
+  const totalPages = getPages(products.length, productsPerPage);
+
+  let totalProductsToShow = getProductsToShow(currentPage, productsPerPage);
+
+  let toShow = products.slice(
+    totalProductsToShow.first,
+    totalProductsToShow.last
+  );
+
+  const setPage = (e) => setCurrentPage((prevState) => (prevState = e.target.value));
+  
+  
+  const setCategoriesToFilter = (e) => {
+    const target = e.target
+    let index = chosenCategories.findIndex((e) => e === target.id);
+    console.log('me ejecuto')
+
+    if 
+    (target.checked && index === -1) {
+      // setChosenCategories((prevState) => (prevState = [...prevState, target.id]));
+      console.log("1")
+      dispatch(actionsCreators.chooseCategories(target.id, "add category"))
+    }
+
+    else if 
+    (!target.checked && index !== -1) {
+      console.log("2")
+      // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
+      dispatch(actionsCreators.chooseCategories(target.id, "remove category", index))
+    }
+
+    // dispatch(actionsCreators.filterProductsByCategory(chosenCategories));
+  };
 
   return (
-
-    <MarketProvider>
-      <div className={style.Market}>
-        <Categories categories={props.categories}/>
-        <Products products={props.products} />
-      </div>
-    </MarketProvider>
-
+    <div className={style.Market}>
+      <Categories
+        categories={categories}
+        setCategoriesToFilter={setCategoriesToFilter}
+        chosenCategories={chosenCategories}
+      />
+      <Products products={toShow} />
+      <Paginate totalPages={totalPages} setPage={setPage} />
+    </div>
   );
 };
 export default Market;

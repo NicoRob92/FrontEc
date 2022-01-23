@@ -1,26 +1,13 @@
+import Categorie from "../../components/Categorie/Categorie";
 
-import { useContext, useEffect } from "react"
+import styles from "./_Categories.module.scss";
 
-import Categorie from "../../components/Categorie/Categorie"
-import MarketContext from "../../context/MarketContext"
-
-import styles from "./_Categories.module.scss"
-
-
-const Categories = () => {
-  let {fetchData,categories} = useContext(MarketContext)
-  
-  
-  useEffect(() => {
-    categories || fetchData()
-  },[fetchData])
+const Categories = ({ categories, setCategoriesToFilter, chosenCategories }) => {
 
   return (
     <div className={styles.categoriesContainer}>
-      {/* <input type='button' onClick={fetchData}></input> */}
-      {categories?.map(e => (
-        <Categorie key={e.name} name={e.name}/>
-
+      {categories?.map((e) => (
+        <Categorie key={e.id} id={e.id} name={e.name} setCategoriesToFilter={setCategoriesToFilter} checked={chosenCategories.includes(e.id)}/>
       ))}
     </div>
   );
