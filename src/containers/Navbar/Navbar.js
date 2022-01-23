@@ -3,14 +3,18 @@ import styles from './_Navbar.module.scss';
 import { Searchbar } from '../../components/Searchbar/Searchbar';
 import { Profile } from '../../components/Profile/Profile';
 import Cart from '../../components/Cart/Cart';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
+  const { isAuthenticated } = useAuth0();
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.tittle}>Nombre</h2>
+      <Link to={'/'} className={styles.tittle}>
+        <h2 className={styles.tittle}>Nombre</h2>
+      </Link>
       <Searchbar className={styles.searchbar} />
       <div className={styles.profile}>
         <Profile />
@@ -31,8 +35,12 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <NavLink to='/register'>Register</NavLink>
       </div>
+      {isAuthenticated ? null : (
+        <NavLink to='/register' className={styles.register}>
+          Register
+        </NavLink>
+      )}
       <Cart showCart={showCart} setShowCart={setShowCart} />
     </div>
   );

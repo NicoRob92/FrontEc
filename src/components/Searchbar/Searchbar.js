@@ -6,6 +6,7 @@ export const Searchbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset()
   };
 
   return (
@@ -14,7 +15,8 @@ export const Searchbar = () => {
         <input
           type='text'
           onChange={(e) => setInput(e.target.value)}
-          placeholder='Ingrese producto o categoria'
+          placeholder='Buscar'
+          value={input}
         />
         <Link to={`/search/${input}`}>
           <button type='submit'>

@@ -1,3 +1,4 @@
+import faker from "faker"
 import * as actionTypes from "./actionTypes"
 
 
@@ -13,7 +14,8 @@ export function getProducts() {
     //   dispatch({ type: "LOADING", payload: "products" });
       return fetch(getProductsUrl)
           .then(response => response.json())
-          .then(json => {                   
+          .then(json => {  
+                json.forEach(e => {e.image = faker.image.image(350,350,true)})
               dispatch({ type: actionTypes.GET_PRODUCTS, payload: json });                      
           })
           .catch(e=>console.error(e))

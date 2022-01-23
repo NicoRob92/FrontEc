@@ -1,8 +1,9 @@
 import styles from './_PostCard.module.scss';
-
+import {Link} from 'react-router-dom'
 export const PostCard = ({ product }) => {
   return (
-    <div className={styles.container}>
+    <Link to='/card' className={styles.container}>
+    
       <div className={styles.image}>
         <img src={product.image} alt='' />
       </div>
@@ -15,6 +16,7 @@ export const PostCard = ({ product }) => {
       <span>Stock</span>
       <span>Privado</span>
       </div>
-    </div>
+    
+    </Link>
   );
 };

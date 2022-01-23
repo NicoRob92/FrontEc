@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './_CarrouselOfertas.module.scss';
 
 export const CarrouselOfertas = ({ cards, arr }) => {
   const number = Number(cards);
   const [selectIndex, setselectIndex] = useState(0);
   const [selectedImage, setselectedImage] = useState(arr.slice(0, number));
+  const [changeImage, setchangeImage] = useState(false);
+
   const selectNewImage = (arr, next = true) => {
     const condition = next
-      ? selectIndex < arr.length - number
+      ? selectIndex < arr?.length - number
       : selectIndex > 0;
     const nextIndex = next
       ? condition
@@ -15,10 +17,17 @@ export const CarrouselOfertas = ({ cards, arr }) => {
         : 0
       : condition
       ? selectIndex - 1
-      : arr.length - number;
+      : arr?.length - number;
     setselectIndex(nextIndex);
-    setselectedImage(arr.slice(nextIndex, number + nextIndex));
+    setselectedImage(arr?.slice(nextIndex, number + nextIndex));
   };
+
+  useEffect(() => {
+    setTimeout(() => setchangeImage(!changeImage), 4000);
+  });
+  useEffect(() => {
+    selectNewImage(arr, true);
+  }, [changeImage]);
 
   const previous = () => {
     selectNewImage(arr, false);
@@ -45,7 +54,9 @@ export const CarrouselOfertas = ({ cards, arr }) => {
         </svg>
       </button>
 
-      {selectedImage.map((e) => <img src={require(`../../Assets/${e}.jpg`)} alt='empty'/>)}
+      {selectedImage.map((e) => (
+        <img key={e} src={require(`../../Assets/${e}.jpg`)} alt='empty' />
+      ))}
       <button onClick={() => next()}>
         <svg
           width='41'
