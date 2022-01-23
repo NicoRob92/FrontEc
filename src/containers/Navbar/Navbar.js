@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <Link to={'/'} className={styles.tittle}>
-        <h2 className={styles.tittle}>Nombre</h2>
+        <h2>Ecommerce</h2>
       </Link>
       <Searchbar className={styles.searchbar} />
       <div className={styles.profile}>
