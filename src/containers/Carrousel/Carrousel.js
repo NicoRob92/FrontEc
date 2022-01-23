@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import style from './_Carrousel.module.scss';
 import Card from '../../components/Card/Card';
 
 export const Carrousel = ({ cards, arr }) => {
   const number = Number(cards);
   const [selectIndex, setselectIndex] = useState(0);
-  const [selectedImage, setselectedImage] = useState(arr.slice(0, number));
+  const [selectedImage, setselectedImage] = useState(arr?.slice(0, number));
+const [array,setArray] = useState(arr)
   const selectNewImage = (arr, next = true) => {
     const condition = next
-      ? selectIndex < arr.length - number
+      ? selectIndex < arr?.length - number
       : selectIndex > 0;
     const nextIndex = next
       ? condition
@@ -16,9 +17,9 @@ export const Carrousel = ({ cards, arr }) => {
         : 0
       : condition
       ? selectIndex - 1
-      : arr.length - number;
+      : arr?.length - number;
     setselectIndex(nextIndex);
-    setselectedImage(arr.slice(nextIndex, number + nextIndex));
+    setselectedImage(arr?.slice(nextIndex, number + nextIndex));
   };
 
   const previous = () => {
@@ -27,6 +28,11 @@ export const Carrousel = ({ cards, arr }) => {
   const next = () => {
     selectNewImage(arr, true);
   };
+
+  useEffect(() => {
+    selectNewImage(arr,true)
+  },[array,arr])
+  
 
   return (
     <div className={style.container}>
@@ -46,7 +52,7 @@ export const Carrousel = ({ cards, arr }) => {
         </svg>
       </button>
       <div className={style.image}>
-        {selectedImage.map((e) => (
+        {selectedImage?.map((e) => (
           <Card
             key={e.name}
             image={e.image}
