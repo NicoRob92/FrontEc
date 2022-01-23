@@ -3,7 +3,7 @@ import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
 import CardDetail from "./components/CardDetail/CardDetail";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
-
+import Search from './Views/Search/Search'
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar />     
       <Switch>
         <Route exact path="/">
           <Home />
@@ -39,6 +39,9 @@ const App = () => {
         </Route>
         <Route exact path="/register">
           <Register/>
+      </Route>
+      <Route exact path="/search/:product">
+          <Search />
       </Route>
       </Switch>
     </>

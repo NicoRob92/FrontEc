@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import faker from 'faker';
+import Post from '../../containers/Post/Post';
+import Categories from '../../containers/Categories/Categories';
+import styles from './_Search.module.scss';
+import * as actionsCreators from '../../ducks/actions/actionCreators';
+
+const Search = () => {
+  const { product } = useParams();
+  const state = useSelector((state) => state.reducer.categories);
+  const chosenCategories = useSelector(
+    (state) => state.reducer.chosenCategories
+  );
+  const dispatch = useDispatch();
+  const [filter, setFilter] = useState(null);
+  const [category, setCategory] = useState(null);
+  let arrayId = [];
+
+  const getProducts = async () => {
+    const arr = await axios.get(
+      `http://localhost:4000/api/products?name=${product}`
+    );
+    let array = arr.data;
+    array.forEach((e) => {
+      e.image = faker.image.image(350, 350, true);
+    });
+    setFilter(array);
+  };
+
+  let categoriesId = filter ? filter?.map((e) => e.categoryId) : null;
+  let id = new Set(categoriesId);
+  for (const num of id) {
+    arrayId.push(num);
+  }
+  let arrayCategory = [];
+  arrayId.forEach((e) => arrayCategory.push(state.filter((x) => x.id === e)));
+
+  useEffect(() => {
+    getProducts();
+  }, [product]);
+
+  useEffect(() => {
+    setCategory(arrayCategory.flat());
+  }, [filter]);
+
+  const setCategoriesToFilter = (e) => {
+    const target = e.target;
+    let index = chosenCategories.findIndex((e) => e === target.id);
+    console.log('me ejecuto');
+
+    if (target.checked && index === -1) {
+      // setChosenCategories((prevState) => (prevState = [...prevState, target.id]));
+      console.log('1');
+      dispatch(actionsCreators.chooseCategories(target.id, 'add category'));
+    } else if (!target.checked && index !== -1) {
+      console.log('2');
+      // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
+      dispatch(
+        actionsCreators.chooseCategories(target.id, 'remove category', index)
+      );
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <Categories
+        categories={category}
+        setCategoriesToFilter={setCategoriesToFilter}
+        chosenCategories={chosenCategories}
+      />
+      <Post array={filter} />
+    </div>
+  );
+};
+
+export default Search;
