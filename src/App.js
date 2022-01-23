@@ -22,6 +22,8 @@ export default function App() {
   useEffect(() => {
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getProducts());
+    dispatch(actionCreators.getCountries());
+    dispatch(actionCreators.getUsers());
   }, [dispatch]);
 
   return (

@@ -6,6 +6,7 @@ const getProductsUrl = api + "products"
 const getPostsUrl = api + "Post"
 const getCategoriesUrl = api + "category"
 const getUsersUrl = api+"users"
+const getCountriesUrl = api + "countries"
 
 export function getProducts() {
     return function(dispatch) {
@@ -54,6 +55,19 @@ export function getPosts() {
           .catch(e=>console.error(e))
     };
 }
+
+export function getCountries() {
+    return function(dispatch) {
+    //   dispatch({ type: "LOADING", payload: "posts" });
+      return fetch(getCountriesUrl)
+          .then(response => response.json())
+          .then(json => {                   
+              dispatch({ type: actionTypes.GET_COUNTRIES, payload: json });                      
+          })
+          .catch(e=>console.error(e))
+    };
+}
+
 
 export function getUsers() {
     return function(dispatch) {
