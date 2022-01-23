@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 export default function Register ( ){
 
     const [data, setData]= useState({})
-    const [isSend, setIsSend]= useState(true)
+    const [isSend, setIsSend]= useState(false)
 
     const onSubmit = e=>{
 
