@@ -19,10 +19,11 @@ const Market = () => {
   const products = useSelector((state) => state.reducer.products);
   const chosenCategories = useSelector((state) => state.reducer.chosenCategories)
   const dispatch = useDispatch();
+  console.log(products)
+  console.log(categories)
 
 
   const [currentPage, setCurrentPage] = useState(1);
-  // const [chosenCategories, setChosenCategories] = useState([]);
   const productsPerPage = 20;
 
   useEffect(() => {
@@ -47,23 +48,16 @@ const Market = () => {
   const setCategoriesToFilter = (e) => {
     const target = e.target
     let index = chosenCategories.findIndex((e) => e === target.id);
-    console.log('me ejecuto')
 
     if 
     (target.checked && index === -1) {
-      // setChosenCategories((prevState) => (prevState = [...prevState, target.id]));
-      console.log("1")
       dispatch(actionsCreators.chooseCategories(target.id, "add category"))
     }
 
     else if 
     (!target.checked && index !== -1) {
-      console.log("2")
-      // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
       dispatch(actionsCreators.chooseCategories(target.id, "remove category", index))
     }
-
-    // dispatch(actionsCreators.filterProductsByCategory(chosenCategories));
   };
 
   return (
