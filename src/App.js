@@ -11,6 +11,7 @@ import { Switch, Route } from "react-router-dom";
 import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
+import Register from "./Views/Register/Register";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ const App = () => {
         <Route exact path="/new-post">
           <FormNewPost />
         </Route>
+        <Route exact path="/register">
+          <Register/>
+      </Route>
       </Switch>
     </>
   );
