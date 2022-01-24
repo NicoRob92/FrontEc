@@ -59,6 +59,7 @@ const [array,setArray] = useState(arr)
             title={e.name}
             detail={e.detail}
             price={e.price}
+            id={e.id}
           />
         ))}
       </div>
