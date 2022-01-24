@@ -18,11 +18,17 @@ const Market = () => {
   const categories = useSelector((state) => state.reducer.categories);
   const products = useSelector((state) => state.reducer.products);
   const chosenCategories = useSelector((state) => state.reducer.chosenCategories)
+  const filteredProductsByCategory = useSelector(state => state.reducer.filteredProductsByCategory)
+  
+  let resultsToShow = filteredProductsByCategory.length=== 0 ? products : filteredProductsByCategory
+  console.log(resultsToShow)
+
+
   const dispatch = useDispatch();
 
 
+
   const [currentPage, setCurrentPage] = useState(1);
-  // const [chosenCategories, setChosenCategories] = useState([]);
   const productsPerPage = 20;
 
   useEffect(() => {
@@ -32,50 +38,43 @@ const Market = () => {
       : element?.classList.remove(`${style.categories}`);
   }, []);
 
-  const totalPages = getPages(products.length, productsPerPage);
+  const totalPages = getPages(resultsToShow.length, productsPerPage);
 
-  let totalProductsToShow = getProductsToShow(currentPage, productsPerPage);
+  let toSlice = getProductsToShow(currentPage, productsPerPage);
 
-  let toShow = products.slice(
-    totalProductsToShow.first,
-    totalProductsToShow.last
+  let finalProductsToShow = resultsToShow.slice(
+    toSlice.first,
+    toSlice.last
   );
+
+  console.log(finalProductsToShow)
 
   const setPage = (e) => setCurrentPage((prevState) => (prevState = e.target.value));
   
-  
-  const setCategoriesToFilter = (e) => {
+  const setCategories = (e) => {
     const target = e.target
-    let index = chosenCategories.findIndex((e) => e === target.id);
-    console.log('me ejecuto')
+    let index = chosenCategories.findIndex((e) => e === Number(target.value));
 
-    if 
-    (target.checked && index === -1) {
-      // setChosenCategories((prevState) => (prevState = [...prevState, target.id]));
-      console.log("1")
-      dispatch(actionsCreators.chooseCategories(target.id, "add category"))
-    }
+    if (target.checked && index === -1) dispatch(actionsCreators.chooseCategories(Number(target.value), "add category"))
 
-    else if 
-    (!target.checked && index !== -1) {
-      console.log("2")
-      // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
-      dispatch(actionsCreators.chooseCategories(target.id, "remove category", index))
-    }
+    else if (!target.checked && index !== -1) dispatch(actionsCreators.chooseCategories(Number(target.value), "remove category", index))
 
-    // dispatch(actionsCreators.filterProductsByCategory(chosenCategories));
+    else if (target.id === "reset-chosenCategories") dispatch(actionsCreators.resetCategories())
+    
+    else if (target.id === "search") dispatch(actionsCreators.filterProductsByCategory())
   };
 
   return (
     <div className={style.Market}>
       <Categories
         categories={categories}
-        setCategoriesToFilter={setCategoriesToFilter}
+        setCategories={setCategories}
         chosenCategories={chosenCategories}
       />
-      <Products products={toShow} />
+      <Products products={finalProductsToShow} />
       <Paginate totalPages={totalPages} setPage={setPage} />
     </div>
   );
 };
+
 export default Market;

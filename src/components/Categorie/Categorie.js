@@ -1,11 +1,11 @@
 import styles from "./_Categorie.module.scss";
 
-const Categorie = ({ id, name, setCategoriesToFilter,checked }) => {
+const Categorie = ({ id, name, setCategories}) => {
 
   return (
     <div className={styles.categorieContainer}>
       <div className={styles.pointer}>
-        <input type="checkbox" id={id} onChange={setCategoriesToFilter} defaultChecked={checked}></input>
+        <input type="checkbox" value={id} id={name} onChange={setCategories}/>
       </div>
       <label htmlFor={name}>{name}</label>
     </div>
