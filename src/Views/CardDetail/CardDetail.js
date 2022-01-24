@@ -1,8 +1,10 @@
-import styles from "./_CardDetail.module.scss";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import faker from "faker";
+
+import styles from "./_CardDetail.module.scss";
+
 const CardDetail = () => {
   const [products, setProducts] = useState();
   const { id } = useParams();
