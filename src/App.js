@@ -1,11 +1,11 @@
 import Navbar from "./containers/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
-import CardDetail from "./components/CardDetail/CardDetail";
+import CardDetail from "./Views/CardDetail/CardDetail";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
-import Search from './Views/Search/Search'
+import Search from "./Views/Search/Search";
 import { useEffect } from "react";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 
 import * as actionCreators from "./ducks/actions/actionCreators";
@@ -25,10 +25,10 @@ const App = () => {
 
   return (
     <>
-      <Navbar />     
+      <Navbar />
       <Switch>
         <Route exact path="/">
-          <Home product= {product} />
+          <Home product={product} />
         </Route>
         <Route exact path="/market">
           <Market />
@@ -40,11 +40,11 @@ const App = () => {
           <FormNewPost />
         </Route>
         <Route exact path="/register">
-          <Register/>
-      </Route>
-      <Route exact path="/search/:product">
+          <Register />
+        </Route>
+        <Route exact path="/search/:product">
           <Search />
-      </Route>
+        </Route>
       </Switch>
     </>
   );
