@@ -40,3 +40,14 @@
     height:250px;
   }
 }
+@media screen and (max-width: $width-mobile){
+    .container{
+      align-items: center;
+    }
+
+    .carrousel{
+      height: 15%;
+      width: 80%;
+    }
+  
+}
