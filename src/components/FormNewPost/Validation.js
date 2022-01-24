@@ -2,6 +2,7 @@ export default function validate(input) {
     let errors = {}
     if (!input.title) {
         errors.title = "A Title is required"
+        console.log("You got here");
     }
 
     if (!input.category) {
