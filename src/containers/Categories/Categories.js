@@ -7,8 +7,9 @@ import FilterSubmit from "../../components/Filters/FilterSubmit";
 import styles from "./_Categories.module.scss";
 
 const Categories = ({ categories, setCategories, chosenCategories }) => {
+
+
   const location = useLocation();
-  console.log(location);
   return (
     <div className={styles.categoriesContainer}>
       <form>
@@ -21,6 +22,7 @@ const Categories = ({ categories, setCategories, chosenCategories }) => {
             chosenCategories={chosenCategories}
           />
         ))}
+        <div className={styles.filtersContainer}>
         {!location.pathname.startsWith("/search") ? (
           <FilterReset setCategories={setCategories} />
         ) : null}
@@ -28,6 +30,7 @@ const Categories = ({ categories, setCategories, chosenCategories }) => {
         {!location.pathname.startsWith("/search") ? (
           <FilterSubmit setCategories={setCategories} />
         ) : null}
+        </div>
       </form>
     </div>
   );

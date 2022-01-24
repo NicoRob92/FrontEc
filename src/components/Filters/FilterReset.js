@@ -1,7 +1,8 @@
+import style from "./_FilterReset.module.scss"
 const FilterReset = ({setCategories}) => {
   return (
     <div>
-      <button type="reset" id='reset-chosenCategories' onClick={setCategories}>Reiniciar</button>
+      <button className={style.FilterReset} type="reset" id='reset-chosenCategories' onClick={setCategories}>Reiniciar</button>
     </div>
   )
 }

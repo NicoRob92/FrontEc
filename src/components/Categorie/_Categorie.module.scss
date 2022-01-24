@@ -6,43 +6,17 @@
   margin: 8px;
 }
 
-// .pointer {
-//   display: block;
-//   position: relative;
-//   cursor: pointer;
-//   // font-size: 20px;
-//   user-select: none;
- 
-//  }
+.categorieContainer input[type="checkbox"] {
+  height: 1em;
+  width: 1em;
+  border: none;
+  background-color: white;
+  border-radius: 0.2em;
+  cursor: pointer;
+  user-select: auto;
+}
 
-// .categorieContainer input[type="checkbox"]{
-//   appearance: none;
-// }
-
-// .categorieContainer input[type="checkbox"]:checked{
-//   // appearance: none;
-//   height: 1.50em;
-//   width: 1.50em;
-//   border: 1px solid white;
-//   background-color: white;
-//   border-radius: .4em;
-// }
-
-// .categorieContainer input[type="checkbox"]:checked{
-//   appearance: none;
-//   height: 1.50em;
-//   width: 1.50em;
-//   border: 1px solid white;
-//   background-color: white;
-//   border-radius: .4em;
-// }
-
-
-
-
-// .categorieContainer input[type="checkbox"]:not(::checked){
-//   content: "#"
-// }
-// .categorieContainer input[type="checkbox"]::after{
-//   content: "a"
-// }
+.categorieContainer label:hover{
+  font-size: 1rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

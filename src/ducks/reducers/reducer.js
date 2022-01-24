@@ -50,7 +50,8 @@ export default function Product(state = initialState, action) {
     case actionTypes.RESET_CATEGORIES: 
       return {
         ...state,
-        chosenCategories: []
+        chosenCategories: [],
+        filteredProductsByCategory: []
       }
     case actionTypes.FILTER_PRODUCTS_BY_CATEGORY:
       return {

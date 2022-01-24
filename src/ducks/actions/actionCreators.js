@@ -9,6 +9,7 @@ const getPostsUrl = api + "Post"
 const getCategoriesUrl = api + "category"
 const getUsersUrl = api+"users"
 const getCountriesUrl = api + "countries"
+const getProductById = `${api}products:id`
 
 export function getProducts() {
     return function(dispatch) {
@@ -70,6 +71,7 @@ export function getCountries() {
           .catch(e=>console.error(e))
     };
 }
+
 
 
 export function getUsers() {

@@ -53,19 +53,11 @@ const Market = () => {
   const setCategories = (e) => {
     const target = e.target;
     let index = chosenCategories.findIndex((e) => e === Number(target.value));
-
+    
     if (target.checked && index === -1)
-      dispatch(
-        actionsCreators.chooseCategories(Number(target.value), "add category")
-      );
+      dispatch(actionsCreators.chooseCategories(Number(target.value), "add category"));
     else if (!target.checked && index !== -1)
-      dispatch(
-        actionsCreators.chooseCategories(
-          Number(target.value),
-          "remove category",
-          index
-        )
-      );
+      dispatch(actionsCreators.chooseCategories(Number(target.value), "remove category", index));
     else if (target.id === "reset-chosenCategories")
       dispatch(actionsCreators.resetCategories());
     else if (target.id === "search")
