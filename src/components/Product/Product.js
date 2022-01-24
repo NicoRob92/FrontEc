@@ -1,11 +1,15 @@
-import styles from "./_Product.module.scss"
-const Product = ({name, price, image}) => {
+import { Link } from "react-router-dom";
+
+import styles from "./_Product.module.scss";
+const Product = ({ name, price, image, id }) => {
   return (
-    <div className={styles.productContainer}>
-      <img className={styles.image}src={image} alt={name}/>
-      <h5>{name}</h5>
-      <h2>{price}$</h2>
-    </div>
+    <Link className={styles.link} to={`/card/${id}`}>
+      <div className={styles.productContainer}>
+        <img className={styles.image} src={image} alt={name} />
+        <h5>{name}</h5>
+        <h2>{price}$</h2>
+      </div>
+    </Link>
   );
 };
 

@@ -10,11 +10,11 @@ const Paginate = (props) => {
   }
 
   return (
-    <div>
+    <>
       {pagesToShow.map((e) => (
         <Page page={e} setPage={props.setPage} />
       ))}
-    </div>
+    </>
   );
 };
 export default Paginate;
