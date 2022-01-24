@@ -31,7 +31,7 @@ const App = () => {
         <Route exact path="/market">
           <Market />
         </Route>
-        <Route exact path="/card">
+        <Route exact path="/card/:id">
           <CardDetail />
         </Route>
         <Route exact path="/new-post">
