@@ -31,35 +31,36 @@ export default function Product(state = initialState, action) {
     case actionTypes.GET_CATEGORY_PRODUCTS:
       return {
         ...state,
-        categoryProducts: state.products.filter(
-          (product) => product.categoryId === action.payload
-        ),
+        categoryProducts: state.products.filter((product) => product.categoryId === action.payload),
       };
-    case actionTypes.CHOOSE_CATEGORIES:
 
-      if 
-      (action.info === "add category") {
+    case actionTypes.CHOOSE_CATEGORIES:
+      if (action.info === "add category") {
         return {
           ...state,
           chosenCategories: [...state.chosenCategories, action.payload],
         };
-      } 
-
-      else if (action.info === "remove category") {
+      } else if (action.info === "remove category") {
         return {
           ...state,
           chosenCategories: state.chosenCategories.filter((e, i) => i !== action.index)
-          // setChosenCategories((prevState) => (prevState = prevState.filter((e, i) => i !== index)));
         };
       }
       break;
-
-    // case actionTypes.FILTER_PRODUCTS_BY_CATEGORY:
-    //   return {
-    //     ...state,
-    //     filteredProductsByCategory: state.products.filter(e => e)
-
-    //   }
+    case actionTypes.RESET_CATEGORIES: 
+      return {
+        ...state,
+        chosenCategories: []
+      }
+    case actionTypes.FILTER_PRODUCTS_BY_CATEGORY:
+      return {
+        ...state,
+        filteredProductsByCategory: state.products.filter((product) => {
+        const categoriesInOrder = state.chosenCategories.sort();
+        if (categoriesInOrder.toString().includes(product.categoryId.toString())) return true;
+        else return false;
+      })
+    }
     // case "LOADING":
     //   return {...state, [action.payload]:["loading"]}
     default:

@@ -84,7 +84,6 @@ export function getUsers() {
     };
 }
 export function chooseCategories(category,info,index) {
-    console.log(category,info)
     return {
         type: actionTypes.CHOOSE_CATEGORIES,
         payload: category,
@@ -93,10 +92,15 @@ export function chooseCategories(category,info,index) {
     }
 }
 
-export function filterProductsByCategory (category) {
+export function resetCategories () {
+    return {
+        type: actionTypes.RESET_CATEGORIES
+    }
+}
+
+export function filterProductsByCategory () {
     return {
         type: actionTypes.FILTER_PRODUCTS_BY_CATEGORY,
-        payload: category
     }
 }
 
