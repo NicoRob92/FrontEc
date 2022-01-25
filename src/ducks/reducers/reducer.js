@@ -9,6 +9,7 @@ const initialState = {
   users: [],
   countries:[],
   filteredProductsByCategory: [],
+  productById: []
 };
 
 export default function Product(state = initialState, action) {
@@ -33,6 +34,11 @@ export default function Product(state = initialState, action) {
         ...state,
         categoryProducts: state.products.filter((product) => product.categoryId === action.payload),
       };
+    case actionTypes.GET_PRODUCTS_BY_ID:
+      return {
+        ...state,
+        productById: action.payload
+      }
 
     case actionTypes.CHOOSE_CATEGORIES:
       if (action.info === "add category") {
@@ -61,8 +67,6 @@ export default function Product(state = initialState, action) {
         else return false;
       })
     }
-    // case "LOADING":
-    //   return {...state, [action.payload]:["loading"]}
     default:
       return state;
   }
