@@ -7,6 +7,7 @@ import validate from "./Validation"
 
 export default function FormNewPost () {
     const [step, setStep] = useState(1)
+    const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         title: '',
         categoryId: '',
@@ -16,7 +17,6 @@ export default function FormNewPost () {
         description: '',
         price: '',
     })
-    const [errors, setErrors] = useState({})
 
 
 
