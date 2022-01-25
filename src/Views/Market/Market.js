@@ -17,19 +17,13 @@ import style from "./_Market.module.scss";
 const Market = () => {
   const categories = useSelector((state) => state.reducer.categories);
   const products = useSelector((state) => state.reducer.products);
-  const chosenCategories = useSelector(
-    (state) => state.reducer.chosenCategories
-  );
-  const filteredProductsByCategory = useSelector(
-    (state) => state.reducer.filteredProductsByCategory
-  );
-
-  let resultsToShow =
-    filteredProductsByCategory.length === 0
-      ? products
-      : filteredProductsByCategory;
-
+  const chosenCategories = useSelector((state) => state.reducer.chosenCategories);
+  const filteredProductsByCategory = useSelector((state) => state.reducer.filteredProductsByCategory);
   const dispatch = useDispatch();
+  console.log(products)
+
+  let productsToShow = filteredProductsByCategory.length === 0 ? products : filteredProductsByCategory;
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 20;
@@ -41,31 +35,22 @@ const Market = () => {
       : element?.classList.remove(`${style.categories}`);
   }, []);
 
-  const totalPages = getPages(resultsToShow.length, productsPerPage);
+  const totalPages = getPages(productsToShow.length, productsPerPage);
 
   let toSlice = getProductsToShow(currentPage, productsPerPage);
 
-  let finalProductsToShow = resultsToShow.slice(toSlice.first, toSlice.last);
+  let finalProductsToShow = productsToShow.slice(toSlice.first, toSlice.last);
 
-  const setPage = (e) =>
-    setCurrentPage((prevState) => (prevState = e.target.value));
+  const setPage = (e) => setCurrentPage((prevState) => (prevState = e.target.value));
 
   const setCategories = (e) => {
     const target = e.target;
     let index = chosenCategories.findIndex((e) => e === Number(target.value));
 
     if (target.checked && index === -1)
-      dispatch(
-        actionsCreators.chooseCategories(Number(target.value), "add category")
-      );
+      dispatch(actionsCreators.chooseCategories(Number(target.value), "add category"));
     else if (!target.checked && index !== -1)
-      dispatch(
-        actionsCreators.chooseCategories(
-          Number(target.value),
-          "remove category",
-          index
-        )
-      );
+      dispatch(actionsCreators.chooseCategories(Number(target.value),"remove category", index));
     else if (target.id === "reset-chosenCategories")
       dispatch(actionsCreators.resetCategories());
     else if (target.id === "search")

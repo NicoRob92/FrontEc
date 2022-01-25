@@ -1,9 +1,9 @@
 import Navbar from "./containers/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
-import CardDetail from "./components/CardDetail/CardDetail";
-import FormNewPost from "./components/FormNewPost/FormNewPost";
+import Detail from "./Views/Detail/Detail";
 import Search from './Views/Search/Search'
+import FormNewPost from "./components/FormNewPost/FormNewPost";
 import { useEffect } from "react";
 import { useDispatch , useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
@@ -33,8 +33,8 @@ const App = () => {
         <Route exact path="/market">
           <Market />
         </Route>
-        <Route exact path="/card/:id">
-          <CardDetail />
+        <Route exact path="/detail/:id">
+          <Detail />
         </Route>
         <Route exact path="/new-post">
           <FormNewPost />
