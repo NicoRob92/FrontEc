@@ -2,19 +2,18 @@ export default function validate(input) {
     let errors = {}
     if (!input.title) {
         errors.title = "A Title is required"
-        console.log("You got here");
     }
 
-    if (!input.category) {
-        errors.category = "A category is required"
+    if (!input.categoryId) {
+        errors.categoryId = "A category is required"
     } 
 
     if (!input.condition) {
         errors.condition = "A condition is required"
     } 
 
-    if (!input.amount) {
-        errors.amount = "A amount is required"
+    if (!input.stock) {
+        errors.stock = "A stock amount is required"
     } 
 
     if (!input.description) {

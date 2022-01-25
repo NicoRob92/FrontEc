@@ -1,103 +1,98 @@
-import { Component } from "react"
-import FormProductDetail from "./FormProductDetail"
-import FormProductDescription from "./FormProductDescription"
-import Confirm from "./Confirm"
-import Success from "./Success"
-import validate from "./Validation"
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { create_post } from "../../ducks/actions/actionCreators";
+import FormProductDetail from "./FormProductDetail";
+import FormProductDescription from "./FormProductDescription";
+import Confirm from "./Confirm";
+import Success from "./Success";
+import validate from "./Validation";
 
-const inititalValue = {
-    title: '',
-    category: '',
-    condition: '',
-    amount: '',
-    photos: '',
-    description: '',
-    price: '',
-}
+export default function FormNewPost() {
+  const dispatch = useDispatch()
+  const [step, setStep] = useState(1)
+  const [errors, setErrors] = useState({})
+  const [input, setInput] = useState({
+    title: "",
+    categoryId: "",
+    condition: "",
+    stock: "",
+    images: "",
+    description: "",
+    price: "",
+  });
 
-export default class FormNewPost extends Component {
+  // Proceed to next step
+  const nextStep = () => {
+    setStep(step + 1)
+  };
 
-    state = {
-        step: 1,
-        input: inititalValue,
-        errors: {}
-    }
+  // Go to previous step
+  const prevStep = () => {
+    setStep(step - 1)
+  };
 
-    handleChange = this.handleChange.bind(this)
-    handleBlur = this.handleBlur.bind(this)
+  // Handle field changes
+  const handleChange = (e) => {
+    setInput((input) => {
+      const { name, value } = e.target
+      return {
+        ...input,
+        [name]: value,
+      }
+    })
+  }
 
+  // Handle errors by blur event
+  const handleBlur = () => {
+    setErrors(validate(input));
+  };
 
-    // Proceed to next step
-    nextStep = () => {
-        const { step } = this.state
-        this.setState({
-            step: step + 1
-        })
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(create_post(input))
+    setInput({
+      title: "",
+      categoryId: "",
+      condition: "",
+      stock: "",
+      images: "",
+      description: "",
+      price: "",
+    });
+  };
 
-    // Go to previous step
-    prevStep = () => {
-        const { step } = this.state
-        this.setState({
-            step: step - 1
-        })
-    }
-
-    // Handle field changes
-    handleChange(e) {
-        this.setState((state) => {
-            const { input } = state
-            const { name, value } = e.target
-            return {
-                input: {
-                    ...input,
-                    [name]: value
-                }
-            }
-        })
-    }
-
-    handleBlur() {
-        this.setState({
-            errors: validate(this.state.input)
-        })
-    }
-
-    render() {
-        const { step } = this.state
-        const { title, category, condition, amount, photos, description, price } = this.state.input
-        const values = { title, category, condition, amount, photos, description, price }
-        switch (step) {
-            case 1:
-                return (
-                    <FormProductDetail
-                        nextStep={this.nextStep}
-                        handleChange={this.handleChange}
-                        handleBlur={this.handleBlur}
-                        values={values} />
-                )
-            case 2:
-                return (
-                    <FormProductDescription
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange={this.handleChange}
-                        handleBlur={this.handleBlur}
-                        values={values} />
-                )
-            case 3:
-                return (
-                    <Confirm
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        values={values} />
-                )
-            case 4:
-                return (
-                    <Success />
-                )
-            default:
-                break;
-        }
-    }
+  switch (step) {
+    case 1:
+      return (
+        <FormProductDetail
+          nextStep={nextStep}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          input={input}
+        />
+      );
+    case 2:
+      return (
+        <FormProductDescription
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          input={input}
+        />
+      );
+    case 3:
+      return (
+        <Confirm
+          nextStep={nextStep}
+          prevStep={prevStep}
+          input={input}
+          handleSubmit={handleSubmit}
+        />
+      );
+    case 4:
+      return <Success />;
+    default:
+      return null;
+  }
 }
