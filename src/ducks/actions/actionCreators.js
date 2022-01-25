@@ -107,3 +107,13 @@ export function filterProductsByCategory () {
 export function getCategoryProducts(categoryId){
     return {type: actionTypes.GET_CATEGORY_PRODUCTS, payload:categoryId}
 }
+
+export function create_post(payload){
+    return async () => {
+        return await fetch(getPostsUrl, {
+            method: 'POST',
+            body: payload
+        })
+        .catch(e=>console.error(e))
+    }
+}

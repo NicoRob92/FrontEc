@@ -1,9 +1,10 @@
 
-const FormProductDetail = ({ nextStep, prevStep, input }) => {
+const FormProductDetail = ({ nextStep, prevStep, input, handleSubmit }) => {
     const continues = e => {
         e.preventDefault()
         nextStep()
         // dispatch the action or handle submit
+        handleSubmit(e)
     }
 
     const back = e => {
