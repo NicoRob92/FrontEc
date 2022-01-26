@@ -18,7 +18,7 @@ const App = () => {
   const product = useSelector((state) => state.reducer.products);
   useEffect(() => {
     dispatch(actionCreators.getCategories());
-    dispatch(actionCreators.getProducts());
+    dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
     dispatch(actionCreators.getUsers());
   }, [dispatch]);

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getPages } from "../../helpers/getPages";
-import { getProductsToShow } from "../../helpers/getProductsToShow";
+import { getPostToShow } from "../../helpers/getPostToShow";
 
 import * as actionsCreators from "../../ducks/actions/actionCreators";
 
@@ -16,17 +16,17 @@ import style from "./_Market.module.scss";
 
 const Market = () => {
   const categories = useSelector((state) => state.reducer.categories);
-  const products = useSelector((state) => state.reducer.products);
+  const post = useSelector((state) => state.reducer.post);
   const chosenCategories = useSelector((state) => state.reducer.chosenCategories);
-  const filteredProductsByCategory = useSelector((state) => state.reducer.filteredProductsByCategory);
+  const filteredPostByCategory = useSelector((state) => state.reducer.filteredPostByCategory);
   const dispatch = useDispatch();
-  console.log(products)
+  console.log(post)
 
-  let productsToShow = filteredProductsByCategory.length === 0 ? products : filteredProductsByCategory;
+  let postToShow = filteredPostByCategory.length === 0 ? post : filteredPostByCategory;
 
 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 20;
+  const postPerPage = 20;
 
   useEffect(() => {
     let element = document.getElementById("categories");
@@ -35,11 +35,11 @@ const Market = () => {
       : element?.classList.remove(`${style.categories}`);
   }, []);
 
-  const totalPages = getPages(productsToShow.length, productsPerPage);
+  const totalPages = getPages(postToShow.length, postPerPage);
 
-  let toSlice = getProductsToShow(currentPage, productsPerPage);
+  let toSlice = getPostToShow(currentPage, postPerPage);
 
-  let finalProductsToShow = productsToShow.slice(toSlice.first, toSlice.last);
+  let finalPostToShow = postToShow.slice(toSlice.first, toSlice.last);
 
   const setPage = (e) => setCurrentPage((prevState) => (prevState = e.target.value));
 
@@ -54,7 +54,7 @@ const Market = () => {
     else if (target.id === "reset-chosenCategories")
       dispatch(actionsCreators.resetCategories());
     else if (target.id === "search")
-      dispatch(actionsCreators.filterProductsByCategory());
+      dispatch(actionsCreators.filterPostByCategory());
   };
 
   return (
@@ -65,7 +65,7 @@ const Market = () => {
           setCategories={setCategories}
           chosenCategories={chosenCategories}
         />
-        <Products products={finalProductsToShow} />
+        <Products products={finalPostToShow} />
       </div>
       <div className={style.Paginate}>
         <Paginate totalPages={totalPages} setPage={setPage} />

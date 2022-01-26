@@ -15,7 +15,7 @@ const CardDetail = () => {
   const productById = useSelector((state) => state.reducer.productById);
 
   useEffect(() => {
-    dispatch(actionsCreators.getProductsById(id));
+    dispatch(actionsCreators.getPostById(id));
   }, [dispatch, id]);
 
   return (
