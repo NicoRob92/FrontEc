@@ -12,7 +12,7 @@ import * as actionsCreators from "../../ducks/actions/actionCreators";
 const CardDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const productById = useSelector((state) => state.reducer.productById);
+  const postById = useSelector((state) => state.reducer.postById);
 
   useEffect(() => {
     dispatch(actionsCreators.getPostById(id));
@@ -20,9 +20,9 @@ const CardDetail = () => {
 
   return (
     <div className={styles.Container}>
-      {productById ? <DetailLeftCard productById={productById} /> : null}
-      {productById ? <DetailRightCard productById={productById} /> : null}
-      {productById ? <Purchase productById={productById} /> : null}     
+      {postById ? <DetailLeftCard productById={postById} /> : null}
+      {postById ? <DetailRightCard postById={postById} /> : null}
+      {postById ? <Purchase postById={postById} /> : null}     
     </div>
   );
 };
