@@ -4,10 +4,10 @@ import styles from './_Home.module.scss';
 import { Carrousel } from '../../containers/Carrousel/Carrousel';
 import { CarrouselOfertas } from '../../containers/CarrouselOfertas/CarrouselOfertas';
 import {Link} from 'react-router-dom'
-const Home = ({product}) => {
+const Home = ({post}) => {
   
-  const [products,setproducts] = useState()
-  console.log(product)
+  const [posts,setPosts] = useState()
+  console.log(post)
   const images = ['1', '2', '3', '4', '5'];
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const Home = ({product}) => {
   });
 
   useEffect(() => {
-    setproducts(product)
-  },[product])
+    setPosts(post)
+  },[post])
 
   
 
@@ -37,22 +37,22 @@ const Home = ({product}) => {
 
       <div className={styles.carrousel}>
         {/* Carousel  component */}
-        <div className={styles.productos}>
-        <h1>Productos Destacados</h1>
+        <div className={styles.post}>
+        <h1>postos Destacados</h1>
         <Link to='/market'>Ver todos</Link>
         </div>
-        <Carrousel cards='4' arr={products} />
+        <Carrousel cards='4' arr={posts} />
       </div>
       <span className={styles.separador}></span>
 
       <div className={styles.carrousel}>
         {/* Carousel  component */}
         
-        <div className={styles.productos}>
+        <div className={styles.post}>
         <h1>Subastas Destacadas</h1>
         <Link to='/market'>Ver todos</Link>
         </div>
-        <Carrousel cards='4' arr={products} />
+        <Carrousel cards='4' arr={posts} />
       </div>
 
       {/* Footer */}

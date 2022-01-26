@@ -15,7 +15,7 @@ import Register from "./Views/Register/Register";
 
 const App = () => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.reducer.products);
+  const post = useSelector((state) => state.reducer.post);
   useEffect(() => {
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
@@ -28,7 +28,7 @@ const App = () => {
       <Navbar />     
       <Switch>
         <Route exact path="/">
-          <Home product= {product} />
+          <Home post= {post} />
         </Route>
         <Route exact path="/market">
           <Market />
@@ -42,7 +42,7 @@ const App = () => {
         <Route exact path="/register">
           <Register/>
       </Route>
-      <Route exact path="/search/:product">
+      <Route exact path="/search/:name">
           <Search />
       </Route>
       </Switch>
