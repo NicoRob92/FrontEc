@@ -5,6 +5,7 @@ const initialState = {
   chosenCategories: [],
   categoryPost: [],
   posts: [],
+  cart: [],
   users: [],
   countries:[],
   filteredPostByCategory: [],
@@ -13,8 +14,11 @@ const initialState = {
 
 export default function Product(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.GET_POST:
-      return { ...state, post: action.payload };
+    case actionTypes.GET_POSTS:
+      return { 
+        ...state, 
+        posts: action.payload 
+      };
 
     case actionTypes.GET_CATEGORIES:
       return { ...state, categories: action.payload };
@@ -51,17 +55,23 @@ export default function Product(state = initialState, action) {
     case actionTypes.RESET_CATEGORIES: 
       return {
         ...state,
-        chosenCategories: []
+        chosenCategories: [],
+        filteredPostByCategory: []
       }
-    case actionTypes.FILTER_POST_BY_CATEGORY:
+    case actionTypes.FILTER_POSTS_BY_CATEGORY:
       return {
         ...state,
-        filteredPostByCategory: state.post.filter((post) => {
+        filteredPostByCategory: state.posts.filter((post) => {
         const categoriesInOrder = state.chosenCategories.sort();
         if (categoriesInOrder.toString().includes(post.categoryId.toString())) return true;
         else return false;
       })
     }
+    case actionTypes.ADD_POST_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, action.payload]
+      }
     default:
       return state;
   }

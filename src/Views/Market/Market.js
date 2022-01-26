@@ -16,11 +16,10 @@ import style from "./_Market.module.scss";
 
 const Market = () => {
   const categories = useSelector((state) => state.reducer.categories);
-  const post = useSelector((state) => state.reducer.post);
+  const post = useSelector((state) => state.reducer.posts);
   const chosenCategories = useSelector((state) => state.reducer.chosenCategories);
   const filteredPostByCategory = useSelector((state) => state.reducer.filteredPostByCategory);
   const dispatch = useDispatch();
-  console.log(post)
 
   let postToShow = filteredPostByCategory.length === 0 ? post : filteredPostByCategory;
 
@@ -50,7 +49,7 @@ const Market = () => {
     if (target.checked && index === -1)
       dispatch(actionsCreators.chooseCategories(Number(target.value), "add category"));
     else if (!target.checked && index !== -1)
-      dispatch(actionsCreators.chooseCategories(Number(target.value),"remove category", index));
+      dispatch(actionsCreators.chooseCategories(Number(target.value), "remove category", index));
     else if (target.id === "reset-chosenCategories")
       dispatch(actionsCreators.resetCategories());
     else if (target.id === "search")
