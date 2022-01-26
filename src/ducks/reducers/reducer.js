@@ -1,43 +1,38 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  products: [],
   categories: [],
   chosenCategories: [],
-  categoryProducts: [],
+  categoryPost: [],
   posts: [],
   users: [],
   countries:[],
-  filteredProductsByCategory: [],
-  productById: []
+  filteredPostByCategory: [],
+  postById: []
 };
 
 export default function Product(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.GET_PRODUCTS:
-      return { ...state, products: action.payload };
+    case actionTypes.GET_POST:
+      return { ...state, post: action.payload };
 
     case actionTypes.GET_CATEGORIES:
       return { ...state, categories: action.payload };
-
-    case actionTypes.GET_POSTS:
-      return { ...state, posts: action.payload };
-
     case actionTypes.GET_USERS:
       return { ...state, users: action.payload };
 
     case actionTypes.GET_COUNTRIES:
       return { ...state, countries: action.payload };
 
-    case actionTypes.GET_CATEGORY_PRODUCTS:
+    case actionTypes.GET_CATEGORY_POST:
       return {
         ...state,
-        categoryProducts: state.products.filter((product) => product.categoryId === action.payload),
+        categoryPost: state.posts.filter((post) => post.categoryId === action.payload),
       };
-    case actionTypes.GET_PRODUCTS_BY_ID:
+    case actionTypes.GET_POST_BY_ID:
       return {
         ...state,
-        productById: action.payload
+        postById: action.payload
       }
 
     case actionTypes.CHOOSE_CATEGORIES:
@@ -58,12 +53,12 @@ export default function Product(state = initialState, action) {
         ...state,
         chosenCategories: []
       }
-    case actionTypes.FILTER_PRODUCTS_BY_CATEGORY:
+    case actionTypes.FILTER_POST_BY_CATEGORY:
       return {
         ...state,
-        filteredProductsByCategory: state.products.filter((product) => {
+        filteredPostByCategory: state.post.filter((post) => {
         const categoriesInOrder = state.chosenCategories.sort();
-        if (categoriesInOrder.toString().includes(product.categoryId.toString())) return true;
+        if (categoriesInOrder.toString().includes(post.categoryId.toString())) return true;
         else return false;
       })
     }
