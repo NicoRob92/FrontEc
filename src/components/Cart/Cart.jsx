@@ -3,7 +3,7 @@ import {useState, useRef, useEffect} from "react"
 import CartItem from "./CartItem"
 import Fade from 'react-reveal/Fade';
 
-export default function Cart ({showCart, setShowCart}){
+export default function Cart ({showCart, setShowCart, allPostInCart}){
     
     const [items, setItems] = useState ([
         {product:"Casa grande", key:0, amount:1},
@@ -27,11 +27,11 @@ export default function Cart ({showCart, setShowCart}){
         
             <div className= {s.cartList}>
 
-                {items.map(item=><CartItem 
-                product={item.product} 
+                {allPostInCart.map(item=><CartItem 
+                product={item.name} 
                 key={item.key} 
                 id ={item.key}
-                amount={item.amount}
+                amount={item.toBuy}
 
                 />)}
                 <button>Checkout</button>

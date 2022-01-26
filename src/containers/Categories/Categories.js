@@ -8,7 +8,6 @@ import styles from "./_Categories.module.scss";
 
 const Categories = ({ categories, setCategories, chosenCategories }) => {
   const location = useLocation();
-  console.log(location);
   return (
     <div className={styles.categoriesContainer}>
       <form>
