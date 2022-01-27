@@ -1,23 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Searchbar } from "../../components/Searchbar/Searchbar";
-import { Profile } from "../../components/Profile/Profile";
+import Searchbar from "../../components/Searchbar/Searchbar";
+import Profile from "../../components/Profile/Profile";
 import Cart from "../../components/Cart/Cart";
+
+import * as actionCreators from "../../ducks/actions/actionCreators";
 
 import styles from "./_Navbar.module.scss";
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const { isAuthenticated } = useAuth0();
+  const cart = useSelector((state) => state.reducer.cart);
+  console.log(cart);
 
-  const LS = Object.keys(localStorage)
-  let allPostInCart = []
-  for (const key of LS) {
-    allPostInCart = [...allPostInCart, JSON.parse(localStorage.getItem(key))]
+  const dispatch = useDispatch();
+
+  let allCartInLS = [];
+  for (const key of Object.keys(localStorage)) {
+    allCartInLS = [...allCartInLS, JSON.parse(localStorage.getItem(key))];
   }
 
+  useEffect(() => {
+    dispatch(actionCreators.setCart(allCartInLS));
+  }, [dispatch, showCart, isAuthenticated]);
+
+  const removeProduct = (e) => {
+    localStorage.removeItem(e.target.id);
+    let allCartInLS = [];
+    for (const key of Object.keys(localStorage)) {
+      allCartInLS = [...allCartInLS, JSON.parse(localStorage.getItem(key))];
+    }
+    dispatch(actionCreators.setCart(allCartInLS));
+  };
+
+  const reduceQuantity = (e) => {
+    let product = JSON.parse(localStorage.getItem(e.target.id));
+    if (product.quantity > 1) {
+      product.quantity--;
+      localStorage.setItem(product.id, JSON.stringify(product));
+      let allCartInLS = [];
+      for (const key of Object.keys(localStorage)) {
+        allCartInLS = [...allCartInLS, JSON.parse(localStorage.getItem(key))];
+      }
+      dispatch(actionCreators.setCart(allCartInLS));
+    }
+  };
+
+  const incrementQuantity = (e) => {
+    let product = JSON.parse(localStorage.getItem(e.target.id));
+    if (product.quantity < product.stock) {
+      product.quantity++;
+      localStorage.setItem(product.id, JSON.stringify(product));
+      let allCartInLS = [];
+      for (const key of Object.keys(localStorage)) {
+        allCartInLS = [...allCartInLS, JSON.parse(localStorage.getItem(key))];
+      }
+      dispatch(actionCreators.setCart(allCartInLS));
+    }
+  };
+
+  
 
   return (
     <div className={styles.container}>
@@ -51,7 +97,14 @@ const Navbar = () => {
           Register
         </NavLink>
       )}
-      <Cart showCart={showCart} setShowCart={setShowCart} allPostInCart={allPostInCart}/>
+      <Cart
+        showCart={showCart}
+        setShowCart={setShowCart}
+        allPostInCart={cart}
+        reduceQuantity={reduceQuantity}
+        incrementQuantity={incrementQuantity}
+        removeProduct={removeProduct}
+      />
     </div>
   );
 };

@@ -1,43 +1,54 @@
-import s from "./Cart.module.scss"
-import {useState, useRef, useEffect} from "react"
-import CartItem from "./CartItem"
-import Fade from 'react-reveal/Fade';
+import { useRef, useEffect } from "react";
 
-export default function Cart ({showCart, setShowCart, allPostInCart}){
-    
-    const [items, setItems] = useState ([
-        {product:"Casa grande", key:0, amount:1},
-        {product:"Perro", key:1, amount:1}])
-    const cart = useRef(null)
+import CartItem from "./CartItem";
 
-    useEffect(()=>{
-        if(!showCart){
-            return cart.current.classList.add(`${s.closed}`)
-        }
-        return cart.current.classList.remove(`${s.closed}`)
-    })
+import styles from "./Cart.module.scss";
 
-    return<div className={s.cartContainer}>
-    
-    <section className ={s.cart} ref={cart}>
-        <button onClick={()=>setShowCart(false)} className={s.close}>x</button>
-        <div className={s.title}>
-           <h3>Your cart</h3> 
+const Cart = ({
+  showCart,
+  setShowCart,
+  allPostInCart,
+  removeProduct,
+  incrementQuantity,
+  reduceQuantity,
+}) => {
+  const cart = useRef(null);
+  useEffect(() => {
+    if (!showCart) return cart.current.classList.add(`${styles.closed}`);
+    return cart.current.classList.remove(`${styles.closed}`);
+  });
+
+  return (
+    <div className={styles.cartContainer}>
+      <section className={styles.cart} ref={cart}>
+        <div>
+          <input
+            type="button"
+            value="X"
+            onClick={() => setShowCart(false)}
+            className={styles.close}
+          />
         </div>
-        
-            <div className= {s.cartList}>
-
-                {allPostInCart.map(item=><CartItem 
-                product={item.name} 
-                key={item.key} 
-                id ={item.key}
-                amount={item.toBuy}
-
-                />)}
-                <button>Checkout</button>
-            </div>
-
-        </section>
+        <div className={styles.title}>
+          <h1>Tu carrito</h1>
+        </div>
+        <div className={styles.cartList}>
+          {allPostInCart?.map((item) => (
+            <CartItem
+              name={item.name}
+              key={item.id}
+              id={item.id}
+              quantity={item.quantity}
+              reduceQuantity={reduceQuantity}
+              incrementQuantity={incrementQuantity}
+              removeProduct={removeProduct}
+            />
+          ))}
+          <input type="button" value="Checkout"/>
+        </div>
+      </section>
     </div>
+  );
+};
 
-}
+export default Cart;

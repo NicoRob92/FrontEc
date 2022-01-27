@@ -1,14 +1,17 @@
-import React , {useState} from 'react';
-import style from './_Profile.module.scss';
-import { useAuth0 } from '@auth0/auth0-react';
-import { LoginButton } from '../Login/Login';
-import { Menu } from '../Menu/Menu';
-export const Profile = () => {
+import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import { LoginButton } from "../Login/Login";
+import { Menu } from "../Menu/Menu";
+
+import style from "./_Profile.module.scss";
+
+const Profile = () => {
   const { isAuthenticated, user } = useAuth0();
-  const [show, setShow]= useState(true);
-  const fShow = ()=>{    
-    setShow(!show);    
-  }
+  const [show, setShow] = useState(true);
+  const fShow = () => {
+    setShow(!show);
+  };
 
   return (
     <div className={style.container}>
@@ -16,10 +19,10 @@ export const Profile = () => {
         <div className={style.profile}>
           <button
             className={style.pic}
-             style={{backgroundImage: `url(${user.picture})` }} 
+            style={{ backgroundImage: `url(${user.picture})` }}
             onClick={fShow}
           />
-          <Menu user= {user} show={show}/>
+          <Menu user={user} show={show} />
         </div>
       ) : (
         <LoginButton />
@@ -27,3 +30,5 @@ export const Profile = () => {
     </div>
   );
 };
+
+export default Profile;

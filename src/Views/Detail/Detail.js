@@ -6,8 +6,9 @@ import DetailLeftCard from "../../components/DetailLeftCard/DetailLeftCard";
 import DetailRightCard from "../../components/DetailRightCard/DetailRightCard";
 import Purchase from "../../components/Purchase/Purchase";
 
-import styles from "./_Detail.module.scss";
 import * as actionsCreators from "../../ducks/actions/actionCreators";
+
+import styles from "./_Detail.module.scss";
 
 const CardDetail = () => {
   const dispatch = useDispatch();
@@ -15,28 +16,30 @@ const CardDetail = () => {
   const postById = useSelector((state) => state.reducer.postById);
   const cart = useSelector((state) => state.reducer.cart);
 
-  let quantity = document.getElementById("quantity");
-  const addToCard = (e) => {
-    const postToCart = {
+  useEffect(() => {
+    dispatch(actionsCreators.getPostById(id));
+  }, [dispatch, id]);
+
+  const addPostToCart = (e) => {
+    let quantity = Number(document.getElementById("quantity").value);
+
+    const post = {
       id: postById.id,
       name: postById.name,
       price: postById.price,
       stock: postById.stock,
-      toBuy: Number(quantity.value)
-    }
-    localStorage.setItem(postById.name, JSON.stringify(postToCart));
-    dispatch(actionsCreators.addPostToCart(postById));
+      status: postById.status,
+      quantity,
+    };
+    localStorage.setItem(postById.id, JSON.stringify(post));
   };
-
-  useEffect(() => {
-    dispatch(actionsCreators.getPostById(id));
-  }, [dispatch, id]);
+  
 
   return (
     <div className={styles.Container}>
       {postById ? <DetailLeftCard postById={postById} /> : null}
       {postById ? <DetailRightCard postById={postById} /> : null}
-      {postById ? <Purchase postById={postById} addToCard={addToCard} quantity={quantity}/> : null}
+      {postById ? <Purchase postById={postById} addPostToCart={addPostToCart} /> : null}
     </div>
   );
 };

@@ -112,11 +112,12 @@ export function resetCategories() {
   };
 }
 
-export function addPostToCart(post) {
+export function setCart(post, info = "default") {
   return {
-    type: actionTypes.ADD_POST_TO_CART,
-    payload: post
-  }
+    type: actionTypes.SET_CART,
+    payload: post,
+    info,
+  };
 }
 
 export function filterPostByCategory() {
