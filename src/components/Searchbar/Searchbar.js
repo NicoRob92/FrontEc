@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import style from './_Searchbar.module.scss';
 import { Link } from 'react-router-dom';
-export const Searchbar = () => {
+
+const Searchbar = () => {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
@@ -39,3 +40,5 @@ export const Searchbar = () => {
     </div>
   );
 };
+
+export default Searchbar
