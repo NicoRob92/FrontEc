@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import styles from './_Navbar.module.scss';
-import { Searchbar } from '../../components/Searchbar/Searchbar';
-import { Profile } from '../../components/Profile/Profile';
-import Cart from '../../components/Cart/Cart';
-import { NavLink, Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
+
+import Searchbar from "../../components/Searchbar/Searchbar";
+import Profile from "../../components/Profile/Profile";
+import Cart from "../../components/Cart/Cart";
+
+import * as actionCreators from "../../ducks/actions/actionCreators";
+
+import styles from "./_Navbar.module.scss";
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
+
   const [showLogin, setShowLogin] = useState(false);
 
   return (
