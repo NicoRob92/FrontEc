@@ -4,7 +4,7 @@ const initialState = {
   categories: [],
   chosenCategories: [],
   categoryPost: [],
-  posts: [],
+  post: [],
   users: [],
   countries:[],
   filteredPostByCategory: [],
@@ -27,7 +27,7 @@ export default function Product(state = initialState, action) {
     case actionTypes.GET_CATEGORY_POST:
       return {
         ...state,
-        categoryPost: state.posts.filter((post) => post.categoryId === action.payload),
+        categoryPost: state.post.filter((post) => post.categoryId === action.payload),
       };
     case actionTypes.GET_POST_BY_ID:
       return {

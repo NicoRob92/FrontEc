@@ -1,4 +1,5 @@
 import faker from "faker"
+import axios from 'axios'
 import * as actionTypes from "./actionTypes"
 
 
@@ -29,7 +30,7 @@ export function getPostsByName(name) {
           .then(response => response.json())
           .then(json => {                   
             json.forEach(e => {e.image = faker.image.image(350,350,true)})
-              dispatch({ type: actionTypes.GET_POST, payload: json });                      
+                                  
           })
           .catch(e=>console.error(e))
     };
@@ -77,7 +78,7 @@ export function create_post(payload) {
       }).catch((e) => console.error(e));
     };
 }
-
+/* 
 export function getUsers() {
     return function(dispatch) {
     //   dispatch({ type: "LOADING", payload: "users" });
@@ -88,7 +89,7 @@ export function getUsers() {
           })
           .catch(e=>console.error(e))
     };
-}
+} */
 export function chooseCategories(category,info,index) {
     return {
         type: actionTypes.CHOOSE_CATEGORIES,
@@ -113,3 +114,4 @@ export function filterPostByCategory () {
 export function getCategoryPost(categoryId){
     return {type: actionTypes.GET_CATEGORY_POST, payload:categoryId}
 }
+
