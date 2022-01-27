@@ -1,21 +1,31 @@
 @import "../../sass/variables.scss";
 @import "../../sass/mixins.scss";
 
-.container {
-  @include conteiner;
+.navbar {
+  display: flex;
   width: 100%;
   height: 7vh;
+}
+
+.container {
+  width: 100%;
   background-color: $CPrimary;
+  display: flex;
+  align-items: center;
 }
 
 .profile {
   height: 100%;
-  width: 15%;
-  position: relative;
+  width: 100%;
 }
 
 .cart {
+  width:15%;
   position: relative;
+  height: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
   left: 0;
   button {
     border: none;
@@ -23,13 +33,14 @@
   }
 }
 .tittle {
-  position: absolute;
-  left: 10px;
-  width: 10%;
+  width: 100%;
   text-decoration: none;
   color: goldenrod;
 }
 .register {
+  width: 15%;
+  height:60%;
+  font-weight: 600;
   position: relative;
   left: 0;
   color: black;
@@ -40,26 +51,31 @@
   text-align: center;
   border: none;
   border-radius: 14px;
-  background-color: #1ed760;
-  box-shadow: 0px 6px 10px rgb(0 0 0 / 40%);
+  background-color: rgba(30, 215, 96, 1);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   transition: 0.3s;
 }
-.register:hover {
-  background-color: #7ee4a2;
-  color: black;
+
+.register :hover {
+  background-color: rgba(12, 145, 60, 1);
+  transition: 0.3s;
 }
 @media screen and (min-width: $width-notebook) {
   .profile {
-    width: 7%;
+    width: 85%;
     height: 95%;
     left: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
 
   .cart {
-    left: 20%;
+    
   }
 
   .tittle {
-    right: 25%;
+    
   }
 }

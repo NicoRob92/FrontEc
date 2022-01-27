@@ -21,7 +21,6 @@ const App = () => {
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
-    dispatch(actionCreators.getUsers());
   }, [dispatch]);
 
   return (

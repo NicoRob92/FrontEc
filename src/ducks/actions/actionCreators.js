@@ -1,5 +1,7 @@
-import faker from "faker";
-import * as actionTypes from "./actionTypes";
+
+import faker from "faker"
+import axios from 'axios'
+import * as actionTypes from "./actionTypes"
 
 const api = "http://localhost:4000/api/";
 
@@ -23,7 +25,7 @@ export function getPosts() {
   };
 }
 
-export function getPostsByName(name) {
+
   return function (dispatch) {
     return fetch(getPostsUrl + "?name=" + name)
       .then((response) => response.json())
@@ -87,24 +89,14 @@ export function create_post(payload) {
   };
 }
 
-export function getUsers() {
-  return function (dispatch) {
-    return fetch(getUsersUrl)
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({ type: actionTypes.GET_USERS, payload: json });
-      })
-      .catch((e) => console.error(e));
-  };
-}
-export function chooseCategories(category, info, index) {
-  return {
-    type: actionTypes.CHOOSE_CATEGORIES,
-    payload: category,
-    info,
-    index,
-  };
-}
+export function chooseCategories(category,info,index) {
+    return {
+        type: actionTypes.CHOOSE_CATEGORIES,
+        payload: category,
+        info,
+        index
+    }
+
 
 export function resetCategories() {
   return {
@@ -129,3 +121,4 @@ export function filterPostByCategory() {
 export function getCategoryPost(categoryId) {
   return { type: actionTypes.GET_CATEGORY_POST, payload: categoryId };
 }
+
