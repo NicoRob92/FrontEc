@@ -16,17 +16,18 @@
 
 .profile {
   height: 100%;
-  width: 100%;
+  width: auto;
+  transition: all 0.4s;
 }
 
 .cart {
-  width:15%;
-  position: relative;
+  width:35%;
+  // position: relative;
   height: 100%;
   display:flex;
   align-items: center;
   justify-content: center;
-  left: 0;
+  // left: 0;
   button {
     border: none;
     background-color: transparent;
