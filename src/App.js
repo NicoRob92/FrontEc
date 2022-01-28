@@ -13,6 +13,7 @@ import * as actionCreators from "./ducks/actions/actionCreators";
 import "./App.css";
 import Register from "./Views/Register/Register";
 
+
 const App = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.reducer.products);
@@ -45,6 +46,7 @@ const App = () => {
       <Route exact path="/search/:product">
           <Search />
       </Route>
+
       </Switch>
     </>
   );
