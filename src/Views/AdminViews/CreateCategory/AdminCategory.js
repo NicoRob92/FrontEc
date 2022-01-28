@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import * as actionCreators from "../../../../ducks/actions/actionCreators.js";
+import * as actionCreators from "../../../ducks/actions/actionCreators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -41,9 +41,9 @@ function AdminCategory ({getCategories, categories}){
             <button type="submit" onClick={e=>onSubmit(e)} >Submit</button>
             <div>
                 <ul>
-                    {
-                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e) =>deleteCategory(e.id)}>X</button></li>)
-                    }
+                    {/* {
+                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e) =>deleteCategory(e, )}>X</button></li>)
+                    } */}
                 </ul>
             </div>
         </div>
