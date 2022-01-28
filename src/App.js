@@ -14,6 +14,7 @@ import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
 
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -44,7 +45,7 @@ const App = () => {
         </Route>
         <Route exact path="/search/:name">
           <Search />
-        </Route>
+      </Route>
       </Switch>
     </>
   );

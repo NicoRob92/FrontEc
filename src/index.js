@@ -12,8 +12,9 @@ import "./index.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
-
+import Admin from "./Views/Admin/Admin";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { Switch, Route } from "react-router-dom";
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
@@ -23,7 +24,15 @@ ReactDOM.render(
         redirectUri={window.location.origin}
       >
         <BrowserRouter>
-          <App />
+        <Switch>
+          <Route path="/admin">
+            <Admin/>
+          </Route>
+          <Route path="/">
+            <App />
+          </Route>
+        </Switch>
+         
         </BrowserRouter>
       </Auth0Provider>
     </React.StrictMode>

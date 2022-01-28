@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    aside{
+        width: 20vw;
+        height: 100vh;
+        background-color:rgb(56, 56, 56);
+    }
+}

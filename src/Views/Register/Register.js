@@ -13,7 +13,7 @@ function Register (props){
         const countryObject = props.countries.find(e=>{
             return e.name.toLowerCase().includes(data.country.toLowerCase())
         })
-        
+        console.log(countryObject.name)
         console.log("si")
         e.preventDefault()
         fetch("http://localhost:4000/api/register", {
