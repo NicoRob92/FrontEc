@@ -11,6 +11,7 @@ const initialState = {
   countries: [],
   filteredPostByCategory: [],
   postById: [],
+  orders: []
 };
 
 export default function Product(state = initialState, action) {
@@ -85,8 +86,18 @@ export default function Product(state = initialState, action) {
           cart: action.payload,
         };
       }
-      break;
-
+    case actionTypes.GET_ORDERS:
+      return{
+        ...state,
+        orders: action.payload,
+      }
+    case actionTypes.SORT_ORDERS:
+        const orders = state.orders
+        const sortedOrder =  action.payload === 'all' ?  orders : state.orders.filter((e) => e.status === action.payload)
+      return{
+        ...state,
+        orders: sortedOrder
+      }  
     default:
       return state;
   }
