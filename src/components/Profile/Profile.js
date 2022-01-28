@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import style from './_Profile.module.scss';
 import { Login } from '../Login/Login';
-import { resetLogin , isLoggedin} from '../../services/auth';
+import { resetLogin , setUsers , setToken} from '../../services/auth';
+import {login} from '../../services/login'
+import axios from 'axios'
 
 export const Profile = ({ show }) => {
-  const [user, setUser] = useState(null);
-  const [local, setLocal] = useState(null);
-  const isLogged = isLoggedin()
- 
+  const [user, setUser] = useState(false);
+  const [name,setName] = useState(localStorage.getItem('username'));
+  const handleUser = () => {
+    setUser(!user)
+  }
+
+  const handleLogOut = (e) => {
+    e.preventDefault()
+    resetLogin();
+    show()
+  }
+
   return (
     <div className={style.container}>
-      {isLogged ? (
+      {user === true ? (
         <div>
-          <div>{user}</div>
-          <button onClick={() => resetLogin()}>Log out</button>
+          <div>{name}</div>
+          <button onClick={(e) => handleLogOut(e)}>Log out</button>
         </div>
       ) : (
-        <Login show={show} />
+        <Login show={show} handleUser={handleUser} setName={setName}/>
       )}
     </div>
   );

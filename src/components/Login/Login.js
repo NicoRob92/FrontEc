@@ -1,30 +1,16 @@
 import { useState } from 'react';
+import { setToken, setUsers } from '../../services/auth';
+import { login } from '../../services/login';
 // import { useDispatch } from 'react-redux';
 import styles from './_Login.module.scss';
 // import {login} from '../../ducks/actions/actionCreators'
-import axios from 'axios';
-import { setToken, setUsers } from '../../services/auth';
-export const Login = ({show}) => {
+export const Login = ({show,handleUser,setName}) => {
   // const dispatch = useDispatch();
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const logged = await axios.post('http://localhost:4000/api/login', user);
-    if (logged.data.msg === ' usuario logueado') {
-      setToken(logged.data.token);
-      let newUser = {
-        username: logged.data.username,
-        rol: logged.data.rol,
-      };
-      setUsers(newUser);
-    }
-    else{
-      alert(logged.data.msg)
-    }
-  };
+
 
   const handleChange = (e) => {
     setUser({
@@ -32,14 +18,32 @@ export const Login = ({show}) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    const logged = await login(user)
+    if(logged.token){
+      let loggedUser = {
+        username: logged.username,
+        rol:logged.rol
+      }
+      setName(logged.username)
+      setToken(logged.token)
+      setUsers(loggedUser)
+      handleUser()
+    }
+    else{
+      alert('Usuario o contraseña invalidos')
+    }
+
+    }
+  
   return (
     <div className={styles.container}>
       <div className={styles.container}>
         <form
           className={styles.form}
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}>
+          onSubmit={(e)=> {handleSubmit(e)}}>
           <input
             type='text'
             name='username'
