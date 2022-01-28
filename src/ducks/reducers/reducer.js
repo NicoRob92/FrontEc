@@ -4,17 +4,22 @@ const initialState = {
   categories: [],
   chosenCategories: [],
   categoryPost: [],
-  posts: [],
+
+  post: [],
+
   users: [],
-  countries:[],
+  countries: [],
   filteredPostByCategory: [],
-  postById: []
+  postById: [],
 };
 
 export default function Product(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.GET_POST:
-      return { ...state, post: action.payload };
+    case actionTypes.GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
+      };
 
     case actionTypes.GET_CATEGORIES:
       return { ...state, categories: action.payload };
@@ -27,13 +32,14 @@ export default function Product(state = initialState, action) {
     case actionTypes.GET_CATEGORY_POST:
       return {
         ...state,
-        categoryPost: state.posts.filter((post) => post.categoryId === action.payload),
+        categoryPost: state.post.filter((post) => post.categoryId === action.payload),
+ 
       };
     case actionTypes.GET_POST_BY_ID:
       return {
         ...state,
-        postById: action.payload
-      }
+        postById: action.payload,
+      };
 
     case actionTypes.CHOOSE_CATEGORIES:
       if (action.info === "add category") {
@@ -44,24 +50,43 @@ export default function Product(state = initialState, action) {
       } else if (action.info === "remove category") {
         return {
           ...state,
-          chosenCategories: state.chosenCategories.filter((e, i) => i !== action.index)
+          chosenCategories: state.chosenCategories.filter(
+            (e, i) => i !== action.index
+          ),
         };
       }
       break;
-    case actionTypes.RESET_CATEGORIES: 
+    case actionTypes.RESET_CATEGORIES:
       return {
         ...state,
-        chosenCategories: []
+        chosenCategories: [],
+        filteredPostByCategory: [],
+      };
+    case actionTypes.FILTER_POSTS_BY_CATEGORY:
+      return {
+        ...state,
+        filteredPostByCategory: state.posts.filter((post) => {
+          const categoriesInOrder = state.chosenCategories.sort();
+          if (categoriesInOrder.toString().includes(post.categoryId.toString()))
+            return true;
+          else return false;
+        }),
+      };
+    case actionTypes.SET_CART:
+      if (action.info === "default") {
+        return {
+          ...state,
+          cart: action.payload,
+        };
       }
-    case actionTypes.FILTER_POST_BY_CATEGORY:
-      return {
-        ...state,
-        filteredPostByCategory: state.post.filter((post) => {
-        const categoriesInOrder = state.chosenCategories.sort();
-        if (categoriesInOrder.toString().includes(post.categoryId.toString())) return true;
-        else return false;
-      })
-    }
+      if (action.info === "addToCart") {
+        return {
+          ...state,
+          cart: action.payload,
+        };
+      }
+      break;
+
     default:
       return state;
   }

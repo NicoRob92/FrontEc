@@ -4,7 +4,7 @@ const Post = ({array}) =>{
     
     return (
         <div className={styles.container}>
-            {array ? array?.map(e => <PostCard key={e.id} product={e}/>) : <h1>Loading</h1>}
+            {array ? array?.map(e => <PostCard key={e.id} post={e}/>) : <h1>Loading</h1>}
         </div>
     )
 }
