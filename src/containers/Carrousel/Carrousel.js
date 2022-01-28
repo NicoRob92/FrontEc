@@ -54,7 +54,7 @@ const [array,setArray] = useState(arr)
       <div className={style.image}>
         {selectedImage?.map((e) => (
           <Card
-            key={e.name}
+            key={e.id}
             image={e.image}
             title={e.name}
             detail={e.detail}

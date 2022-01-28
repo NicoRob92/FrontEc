@@ -25,9 +25,9 @@ export function getPosts() {
   };
 }
 
-
+export function getPostByName(name){
   return function (dispatch) {
-    return fetch(getPostsUrl + "?name=" + name)
+    fetch(getPostsUrl + "?name=" + name)
       .then((response) => response.json())
       .then((json) => {
         json.forEach((e) => {
@@ -96,7 +96,7 @@ export function chooseCategories(category,info,index) {
         info,
         index
     }
-
+  }
 
 export function resetCategories() {
   return {
@@ -121,4 +121,23 @@ export function filterPostByCategory() {
 export function getCategoryPost(categoryId) {
   return { type: actionTypes.GET_CATEGORY_POST, payload: categoryId };
 }
+
+export function getOrders() {
+  return function (dispatch) {
+    return fetch(`http://localhost:4000/api/admin/orders`)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({ type: actionTypes.GET_ORDERS, payload: json });
+      })
+      .catch((e) => console.error(e));
+  };
+}
+
+export function filterOrder(payload){
+  return{
+    type: actionTypes.SORT_ORDERS,
+    payload
+  }
+}
+
 

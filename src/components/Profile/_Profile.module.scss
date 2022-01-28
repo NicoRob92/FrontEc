@@ -5,15 +5,34 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  transition: all 0.5s;
 }
 
 .profile {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
   height: 90%;
-  width: 100%;  
+  width: 100%;
 
+  h5 {
+    color: white;
+  }
+}
+.button{
+  height: 100%;
+  border:none;
+  width: 70%;
+  font-weight: 600;
+  background-color: darkkhaki;
+}
+
+.logout {
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  background-color: #ed1e45;
 }
 .pic {
   width: 45%;
@@ -27,3 +46,10 @@
   margin: 0;
 }
 
+.menu{
+  position: absolute;
+  width:10%;
+  right:0;
+  top:5%;
+  z-index: 3;
+}

@@ -1,30 +1,12 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-import styles from './_Login.module.scss';
-// import {login} from '../../ducks/actions/actionCreators'
-import axios from 'axios';
 import { setToken, setUsers } from '../../services/auth';
-export const Login = () => {
-  // const dispatch = useDispatch();
+import { login } from '../../services/login';
+import styles from './_Login.module.scss';
+export const Login = ({ show, handleUser, setName }) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const logged = await axios.post('http://localhost:4000/api/login', user);
-    if (logged.data.msg === ' usuario logueado') {
-      setToken(logged.data.token);
-      let newUser = {
-        username: logged.data.username,
-        rol: logged.data.rol,
-      };
-      setUsers(newUser);
-    }
-    else{
-      alert(logged.data.msg)
-    }
-  };
 
   const handleChange = (e) => {
     setUser({
@@ -32,6 +14,24 @@ export const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const logged = await login(user);
+    if (logged.token) {
+      let loggedUser = {
+        username: logged.username,
+        rol: logged.rol,
+      };
+      setName(logged.username);
+      setToken(logged.token);
+      setUsers(loggedUser);
+      handleUser();
+    } else {
+      alert('Wrong username o password');
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.container}>
@@ -57,6 +57,9 @@ export const Login = () => {
             Log In
           </button>
         </form>
+        <button className={`${styles.login}`} onClick={show}>
+          x
+        </button>
       </div>
     </div>
   );

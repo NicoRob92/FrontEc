@@ -1,31 +1,18 @@
 @import '../../sass/variables.scss';
 
 .menu {
-  width: 10%;
+  width: 100%;
   background-color: $CPrimary;
   color: $CFourth;
   transition: 0.4s;
-  position: absolute;
-  top: 7%;
-  bottom: 0;
-  left:-60%;
-  transform: translateX(0%);
-  outline: 1px solid;
-  overflow: hidden;
   
 }
-.visible {
-    transform: translateX(100%);
-  }
+
 
 @media screen and (min-width:$width-notebook){
   .menu{
-    width:15vw;
-    height: 100vh;
-    top: 105%;
-    transform: translateX(200%)
-  }
-  .visible {
-    transform: translateX(6%);
+    width:100%;
+    height: 100%;
+    
   }
 }

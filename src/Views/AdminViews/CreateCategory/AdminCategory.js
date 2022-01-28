@@ -41,9 +41,9 @@ function AdminCategory ({getCategories, categories}){
             <button type="submit" onClick={e=>onSubmit(e)} >Submit</button>
             <div>
                 <ul>
-                    {
+                    {/* {
                     categories.map(e=><li key={e.id}>{e.name} <button onClick={(e) =>deleteCategory(e, )}>X</button></li>)
-                    }
+                    } */}
                 </ul>
             </div>
         </div>

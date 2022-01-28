@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Searchbar from "../../components/Searchbar/Searchbar";
-import Profile from "../../components/Profile/Profile";
-import Cart from "../../components/Cart/Cart";
+import Searchbar from '../../components/Searchbar/Searchbar';
+import Profile from '../../components/Profile/Profile';
+import Cart from '../../components/Cart/Cart';
 
-import * as actionCreators from "../../ducks/actions/actionCreators";
+import * as actionCreators from '../../ducks/actions/actionCreators';
 
-import styles from "./_Navbar.module.scss";
+import styles from './_Navbar.module.scss';
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
 
   const [showLogin, setShowLogin] = useState(false);
+
+  const show = () => {
+    setShowLogin(!showLogin);
+  };
 
   return (
     <div className={styles.navbar}>
@@ -31,7 +35,7 @@ const Navbar = () => {
       {/* Profile */}
       {showLogin === false ? (
         <div className={styles.container}>
-          <button onClick={() => setShowLogin(!showLogin)}>Login</button>
+          <button onClick={show}>Login</button>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>
               <svg
@@ -59,7 +63,7 @@ const Navbar = () => {
       ) : (
         <div className={styles.container}>
           <div className={styles.profile}>
-            <Profile/>
+            <Profile show={show} />
           </div>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>

@@ -9,6 +9,7 @@ import Detail from "./Views/Detail/Detail";
 import Search from "./Views/Search/Search";
 import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
+import Order from "./Views/Order/Order";
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
@@ -45,7 +46,10 @@ const App = () => {
         </Route>
         <Route exact path="/search/:name">
           <Search />
-      </Route>
+        </Route>
+        <Route exact path="/order">
+          <Order/>
+        </Route>
       </Switch>
     </>
   );
