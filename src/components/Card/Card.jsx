@@ -6,7 +6,7 @@ const defaultImage =
 
 export default function CardItem({ image, title, details, price, id }) {
   return (
-    <NavLink to={`card/${id}`} className={s.link}>
+    <NavLink to={`detail/${id}`} className={s.link}>
       <article className={s.card}>
         <img src={image || defaultImage} className={s.cardImg} alt='' />
         <div className={s.cardText}>

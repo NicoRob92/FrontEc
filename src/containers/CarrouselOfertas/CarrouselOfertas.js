@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import style from './_CarrouselOfertas.module.scss';
 
-export const CarrouselOfertas = ({ cards, arr }) => {
+const CarrouselOfertas = ({ cards, arr }) => {
   const number = Number(cards);
   const [selectIndex, setselectIndex] = useState(0);
   const [selectedImage, setselectedImage] = useState(arr.slice(0, number));
@@ -75,3 +75,5 @@ export const CarrouselOfertas = ({ cards, arr }) => {
     </div>
   );
 };
+
+export default CarrouselOfertas

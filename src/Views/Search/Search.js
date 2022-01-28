@@ -9,7 +9,7 @@ import styles from './_Search.module.scss';
 import * as actionsCreators from '../../ducks/actions/actionCreators';
 import NotFound from '../../components/NotFound/NotFound';
 const Search = () => {
-  const { product } = useParams();
+  const { name } = useParams();
   const state = useSelector((state) => state.reducer.categories);
   const chosenCategories = useSelector(
     (state) => state.reducer.chosenCategories
@@ -19,9 +19,9 @@ const Search = () => {
   const [category, setCategory] = useState(null);
   let arrayId = [];
 
-  const getProducts = async () => {
+  const getPostByName= async () => {
     const arr = await axios.get(
-      `http://localhost:4000/api/products?name=${product}`
+      `http://localhost:4000/api/post?name=${name}`
     );
     let array = arr.data;
     array.forEach((e) => {
@@ -39,8 +39,8 @@ const Search = () => {
   arrayId.forEach((e) => arrayCategory.push(state.filter((x) => x.id === e)));
 
   useEffect(() => {
-    getProducts();
-  }, [product]);
+    getPostByName()
+  }, [name]);
 
   useEffect(() => {
     setCategory(arrayCategory.flat());
