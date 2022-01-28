@@ -15,6 +15,7 @@ import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
 
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -22,7 +23,6 @@ const App = () => {
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
-    dispatch(actionCreators.getUsers());
   }, [dispatch]);
 
   return (
