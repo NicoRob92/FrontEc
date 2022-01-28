@@ -16,6 +16,10 @@ const Navbar = () => {
 
   const [showLogin, setShowLogin] = useState(false);
 
+  const show = ()=>{
+    setShowLogin(!showLogin)
+  }
+
   return (
     <div className={styles.navbar}>
       {/* Ecommerce */}
@@ -31,7 +35,7 @@ const Navbar = () => {
       {/* Profile */}
       {showLogin === false ? (
         <div className={styles.container}>
-          <button onClick={() => setShowLogin(!showLogin)}>Login</button>
+          <button onClick={show}>Login</button>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>
               <svg
@@ -59,7 +63,7 @@ const Navbar = () => {
       ) : (
         <div className={styles.container}>
           <div className={styles.profile}>
-            <Profile/>
+            <Profile show={show}/>
           </div>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>
