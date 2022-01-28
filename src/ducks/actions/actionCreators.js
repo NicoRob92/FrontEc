@@ -25,9 +25,9 @@ export function getPosts() {
   };
 }
 
-
+export function getPostByName(name){
   return function (dispatch) {
-    return fetch(getPostsUrl + "?name=" + name)
+    fetch(getPostsUrl + "?name=" + name)
       .then((response) => response.json())
       .then((json) => {
         json.forEach((e) => {
@@ -96,7 +96,7 @@ export function chooseCategories(category,info,index) {
         info,
         index
     }
-
+  }
 
 export function resetCategories() {
   return {

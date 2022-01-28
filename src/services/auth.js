@@ -23,6 +23,11 @@ export function setToken(token) {
   
   export function resetLogin() {
     localStorage.removeItem("token");
-    localStorage.removeItem("type");
+    localStorage.removeItem("rol");
     localStorage.removeItem("username");
+  }
+
+  export function isLoggedin(){
+    let token = localStorage.getItem("token");
+    return token ? true : false
   }

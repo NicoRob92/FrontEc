@@ -4,7 +4,7 @@ import styles from './_Login.module.scss';
 // import {login} from '../../ducks/actions/actionCreators'
 import axios from 'axios';
 import { setToken, setUsers } from '../../services/auth';
-export const Login = () => {
+export const Login = ({show}) => {
   // const dispatch = useDispatch();
   const [user, setUser] = useState({
     username: '',
@@ -57,6 +57,9 @@ export const Login = () => {
             Log In
           </button>
         </form>
+          <button className={`${styles.login}`} onClick={show}>
+            Close
+          </button>
       </div>
     </div>
   );
