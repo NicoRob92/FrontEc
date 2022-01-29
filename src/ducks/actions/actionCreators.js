@@ -10,6 +10,7 @@ const getPostByIdUrl = api + "posts";
 const getCategoriesUrl = api + "category";
 const getUsersUrl = api + "users";
 const getCountriesUrl = api + "countries";
+const Review = api + "admin/review"
 
 export function getPosts() {
   return function (dispatch) {
@@ -140,4 +141,22 @@ export function filterOrder(payload){
   }
 }
 
+export function postReview(payload){
+  return async () => {
+    return await fetch(Review, {
+      method: "POST",
+      body: payload,
+    }).catch((e) => console.error(e));
+  };
+}
 
+export function getReview(PostId){
+  return function (dispatch) {
+    return fetch(Review, PostId)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({ type: actionTypes.GET_REVIEW, payload: json });
+      })
+      .catch((e) => console.error(e));
+  };
+}
