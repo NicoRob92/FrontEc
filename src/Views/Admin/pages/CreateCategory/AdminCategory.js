@@ -42,7 +42,7 @@ function AdminCategory ({getCategories, categories}){
             <div>
                 <ul>
                     {
-                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e) =>deleteCategory(e,id)}>X</button></li>)
+                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e,id) =>deleteCategory(e,id)}>X</button></li>)
                     }
                 </ul>
             </div>

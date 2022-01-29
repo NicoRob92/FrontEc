@@ -11,7 +11,6 @@ const Purchase = ({ postById, addPostToCart }) => {
             <h5>En stock: {postById.stock}</h5>
           )}
         </div>
-
         <div className={styles.purchase_button}>
           <div className={styles.purchase_quantity}>
             <input
@@ -22,13 +21,12 @@ const Purchase = ({ postById, addPostToCart }) => {
               max={postById.stock}
             />
           </div>
-
-          <input
-            type="button"
-            value="Add to cart"
-            onClick={addPostToCart}
-          />
-          <input type="button" value="Buy now"></input>
+          <div>
+            <input type="button" value="Add to cart" onClick={addPostToCart} />
+          </div>
+          <div>
+            <input type="button" value="Buy now" />
+          </div>
         </div>
       </div>
     </div>
