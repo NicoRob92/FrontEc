@@ -10,7 +10,7 @@ import { getPostToShow } from "../../helpers/getPostToShow";
 
 import * as actionsCreators from "../../ducks/actions/actionCreators";
 
-import style from "./_Market.module.scss";
+import styles from "./_Market.module.scss";
 
 // import faker from "faker";
 
@@ -30,8 +30,8 @@ const Market = () => {
   useEffect(() => {
     let element = document.getElementById("categories");
     element
-      ? element?.classList.add(`${style.categories}`)
-      : element?.classList.remove(`${style.categories}`);
+      ? element?.classList.add(`${styles.categories}`)
+      : element?.classList.remove(`${styles.categories}`);
   }, []);
 
   const totalPages = getPages(postToShow.length, postPerPage);
@@ -58,7 +58,7 @@ const Market = () => {
 
   return (
     <>
-      <div className={style.Market}>
+      <div className={styles.Market}>
         <Categories
           categories={categories}
           setCategories={setCategories}
@@ -66,7 +66,7 @@ const Market = () => {
         />
         <Products products={finalPostToShow} />
       </div>
-      <div className={style.Paginate}>
+      <div className={styles.Paginate}>
         <Paginate totalPages={totalPages} setPage={setPage} />
       </div>
     </>

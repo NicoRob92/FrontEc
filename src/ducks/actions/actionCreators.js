@@ -1,6 +1,5 @@
 
 import faker from "faker"
-import axios from 'axios'
 import * as actionTypes from "./actionTypes"
 
 const api = "http://localhost:4000/api/";
@@ -104,11 +103,10 @@ export function resetCategories() {
   };
 }
 
-export function setCart(post, info = "default") {
+export function setCart(post) {
   return {
     type: actionTypes.SET_CART,
     payload: post,
-    info,
   };
 }
 

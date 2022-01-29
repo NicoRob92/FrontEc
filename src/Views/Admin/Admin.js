@@ -1,8 +1,8 @@
 import { Switch, Route } from "react-router-dom";
-import AdminButtonLink from "./components/AdminButtonLink";
+import AdminButtonLink from "../../components/AdminButtonLink/AdminButtonLink";
 import styles from "./Admin.module.scss"
-import DashBoard from "./pages/DashBoard";
-import AdminCategory from "./pages/CreateCategory/AdminCategory";
+import DashBoard from "../../Views/AdminViews/DashBoard/DashBoard";
+import AdminCategory from "../../Views/AdminViews/CreateCategory/AdminCategory";
 
 export default function Admin (){
 

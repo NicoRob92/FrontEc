@@ -18,7 +18,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
+
+    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))))
+
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
