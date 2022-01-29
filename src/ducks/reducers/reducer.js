@@ -11,7 +11,8 @@ const initialState = {
   countries: [],
   filteredPostByCategory: [],
   postById: [],
-  orders: []
+  orders: [],
+  reviews: []
 };
 
 export default function Product(state = initialState, action) {
@@ -97,6 +98,11 @@ export default function Product(state = initialState, action) {
       return{
         ...state,
         orders: sortedOrder
+      }
+    case actionTypes.GET_REVIEW:
+      return{
+        ...state,
+        reviews: action.payload
       }  
     default:
       return state;
