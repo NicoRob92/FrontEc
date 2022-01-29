@@ -1,32 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './_Profile.module.scss';
 import { Login } from '../Login/Login';
-import { resetLogin , setUsers , setToken} from '../../services/auth';
-import {login} from '../../services/login'
-import axios from 'axios'
+import { resetLogin } from '../../services/auth';
+import { Menu } from '../Menu/Menu'
 
 export const Profile = ({ show }) => {
   const [user, setUser] = useState(false);
-  const [name,setName] = useState(localStorage.getItem('username'));
+  const [name, setName] = useState(localStorage.getItem('username'));
+  const [showMenu, setShowMenu] =useState(false);
   const handleUser = () => {
-    setUser(!user)
-  }
+    setUser(!user);
+  };
 
   const handleLogOut = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     resetLogin();
-    show()
-  }
+    show();
+  };
 
+  const handleMenu = (e) => {
+    e.preventDefault();
+    setShowMenu(!showMenu);
+  };
+
+  const closeMenu = () => {
+    setShowMenu(!showMenu);
+  }
   return (
     <div className={style.container}>
       {user === true ? (
-        <div>
-          <div>{name}</div>
-          <button onClick={(e) => handleLogOut(e)}>Log out</button>
-        </div>
+        <div className={style.profile}>
+          <button className={style.button} onClick={(e)=> handleMenu(e)}>{name.toUpperCase()}</button>
+          {showMenu === true ? <div className={style.menu}><Menu user={name.toUpperCase()} handleLogOut={handleLogOut} close= {closeMenu}/> </div>: null }
+          </div>
       ) : (
-        <Login show={show} handleUser={handleUser} setName={setName}/>
+        <Login show={show} handleUser={handleUser} setName={setName} />
       )}
     </div>
   );

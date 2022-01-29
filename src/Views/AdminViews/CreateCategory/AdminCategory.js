@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import * as actionCreators from "../../../../ducks/actions/actionCreators.js";
+import * as actionCreators from "../../../ducks/actions/actionCreators";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -23,7 +23,7 @@ function AdminCategory ({getCategories, categories}){
         .then(()=>{
             setNewCategory("")
 
-        })        
+        })
     }
     const deleteCategory = (e,id)=>{ //borrar categoria
         fetch(`http://localhost:4000/api/admin/category/${id}`, {
@@ -34,16 +34,16 @@ function AdminCategory ({getCategories, categories}){
         }}
         )
     }
-    
+
     return (
         <div>
             <input type="text" placeholder="Create category" value={newCategory} onChange={e=>setNewCategory(e.target.value)}></input>
             <button type="submit" onClick={e=>onSubmit(e)} >Submit</button>
             <div>
                 <ul>
-                    {
-                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e,id) =>deleteCategory(e,id)}>X</button></li>)
-                    }
+                    {/* {
+                    categories.map(e=><li key={e.id}>{e.name} <button onClick={(e) =>deleteCategory(e, )}>X</button></li>)
+                    } */}
                 </ul>
             </div>
         </div>

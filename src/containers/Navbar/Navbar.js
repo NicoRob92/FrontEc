@@ -2,13 +2,13 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Searchbar from "../../components/Searchbar/Searchbar";
-import Profile from "../../components/Profile/Profile";
-import Cart from "../../components/Cart/Cart";
+import Searchbar from '../../components/Searchbar/Searchbar';
+import Profile from '../../components/Profile/Profile';
+import Cart from '../../components/Cart/Cart';
 
-import * as actionCreators from "../../ducks/actions/actionCreators";
+import * as actionCreators from '../../ducks/actions/actionCreators';
 
-import styles from "./_Navbar.module.scss";
+import styles from './_Navbar.module.scss';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -48,6 +48,8 @@ const Navbar = () => {
     dispatch(actionCreators.setCart(posts));
     localStorage.setItem("posts", JSON.stringify(posts));
   };
+  const show = () => {
+    setShowLogin(!showLogin);
 
   return (
     <div className={styles.navbar}>

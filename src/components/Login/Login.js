@@ -1,16 +1,12 @@
 import { useState } from 'react';
 import { setToken, setUsers } from '../../services/auth';
 import { login } from '../../services/login';
-// import { useDispatch } from 'react-redux';
 import styles from './_Login.module.scss';
-// import {login} from '../../ducks/actions/actionCreators'
-export const Login = ({show,handleUser,setName}) => {
-  // const dispatch = useDispatch();
+export const Login = ({ show, handleUser, setName }) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
-
 
   const handleChange = (e) => {
     setUser({
@@ -19,31 +15,31 @@ export const Login = ({show,handleUser,setName}) => {
     });
   };
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const logged = await login(user)
-    if(logged.token){
+    const logged = await login(user);
+    if (logged.token) {
       let loggedUser = {
         username: logged.username,
-        rol:logged.rol
-      }
-      setName(logged.username)
-      setToken(logged.token)
-      setUsers(loggedUser)
-      handleUser()
+        rol: logged.rol,
+      };
+      setName(logged.username);
+      setToken(logged.token);
+      setUsers(loggedUser);
+      handleUser();
+    } else {
+      alert('Wrong username o password');
     }
-    else{
-      alert('Usuario o contraseña invalidos')
-    }
+  };
 
-    }
-  
   return (
     <div className={styles.container}>
       <div className={styles.container}>
         <form
           className={styles.form}
-          onSubmit={(e)=> {handleSubmit(e)}}>
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}>
           <input
             type='text'
             name='username'
@@ -61,9 +57,9 @@ export const Login = ({show,handleUser,setName}) => {
             Log In
           </button>
         </form>
-          <button className={`${styles.login}`} onClick={show}>
-            Close
-          </button>
+        <button className={`${styles.login}`} onClick={show}>
+          x
+        </button>
       </div>
     </div>
   );
