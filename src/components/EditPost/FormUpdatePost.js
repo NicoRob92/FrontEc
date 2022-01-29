@@ -5,31 +5,32 @@ import FormProductDescription from "./FormProductDescription";
 import Confirm from "./Confirm";
 import Success from "./Success";
 import validate from "./Validation";
+import {getPostByIdUrl,getCategoriesUrl,api}  from '../../ducks/actions/actionCreators'
 
 import { useParams } from "react-router-dom";
 
 
 function updatePost(post) {
   async function putData(url = "", data = {}) {
-   
+
     const response = await fetch(url, {
-      method: "PUT", 
-      mode: "cors", 
-      cache: "no-cache", 
-      credentials: "same-origin", 
+      method: "PUT",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
         "token": localStorage.getItem("token")
-    
-        
+
+
       },
-      redirect: "follow", 
-      referrerPolicy: "no-referrer", 
-      body: JSON.stringify(data), 
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
     });
-    return response.json(); 
+    return response.json();
   }
-  putData("http://localhost:4000/api/admin/post", post)
+  putData(api+"admin/post", post)
     .then((json) => {
       alert(json.msg);
     })
@@ -41,7 +42,6 @@ export default function FormUpdatePost() {
   let [allCategories,setAllCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
-  let postById = useSelector((state) => state.reducer.postById);
   const [input, setInput] = useState({
     title: "",
     Categories: [],
@@ -56,8 +56,8 @@ export default function FormUpdatePost() {
     async function fetchData() {
       // You can await here
       // ...
-      let data = await fetch("http://localhost:4000/api/posts/"+id).then(res=>res.json())
-      let allCategories = await fetch("http://localhost:4000/api/category").then(res=>res.json())
+      let data = await fetch(getPostByIdUrl+"/"+id).then(res=>res.json())
+      let allCategories = await fetch(getCategoriesUrl).then(res=>res.json())
       setAllCategories(allCategories)
 
       setInput({
@@ -67,7 +67,7 @@ export default function FormUpdatePost() {
        Categories:data.Categories.map(c=>c.id.toString())
 
      })
-  
+
     }
     fetchData()
 
