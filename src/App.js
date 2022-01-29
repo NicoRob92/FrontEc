@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-
+import {MercadoPago} from './components/MercadoPago/MercadoPago'
 import Navbar from "./containers/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
@@ -9,18 +9,18 @@ import Detail from "./Views/Detail/Detail";
 import Search from "./Views/Search/Search";
 import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
-import Order from "./Views/Order/Order";
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
 
-
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))))
+
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
@@ -48,8 +48,8 @@ const App = () => {
         <Route exact path="/search/:name">
           <Search />
         </Route>
-        <Route exact path="/order">
-          <Order/>
+        <Route exact path="/coso">
+          <MercadoPago/>
         </Route>
       </Switch>
     </>
