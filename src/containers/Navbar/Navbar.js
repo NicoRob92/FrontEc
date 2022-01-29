@@ -15,7 +15,7 @@ const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const cart = useSelector((state) => state.reducer.cart);
-  console.log(cart);
+
 
   const show = () => {
     setShowLogin(!showLogin);
@@ -26,7 +26,7 @@ const Navbar = () => {
     posts = posts?.filter((e) => e.id !== Number(id));
     dispatch(actionCreators.setCart(posts));
     localStorage.setItem("posts", JSON.stringify(posts));
-    // let postsToCart = JSON.parse(localStorage.getItem("posts"));
+
   };
 
   const incrementQuantity = (e) => {
@@ -48,8 +48,7 @@ const Navbar = () => {
     dispatch(actionCreators.setCart(posts));
     localStorage.setItem("posts", JSON.stringify(posts));
   };
-  const show = () => {
-    setShowLogin(!showLogin);
+  
 
   return (
     <div className={styles.navbar}>
