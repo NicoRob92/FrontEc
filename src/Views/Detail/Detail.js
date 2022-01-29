@@ -6,7 +6,7 @@ import DetailLeftCard from "../../components/DetailLeftCard/DetailLeftCard";
 import DetailRightCard from "../../components/DetailRightCard/DetailRightCard";
 import Purchase from "../../components/Purchase/Purchase";
 
-import * as actionsCreators from "../../ducks/actions/actionCreators";
+import * as actionCreators from "../../ducks/actions/actionCreators";
 
 import styles from "./_Detail.module.scss";
 
@@ -14,13 +14,13 @@ const CardDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const postById = useSelector((state) => state.reducer.postById);
-  const cart = useSelector((state) => state.reducer.cart);
 
   useEffect(() => {
-    dispatch(actionsCreators.getPostById(id));
+    dispatch(actionCreators.getPostById(id));
   }, [dispatch, id]);
 
-  const addPostToCart = (e) => {
+  const addPostToCart = () => {
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
     let quantity = Number(document.getElementById("quantity").value);
 
     const post = {
@@ -31,9 +31,34 @@ const CardDetail = () => {
       status: postById.status,
       quantity,
     };
-    localStorage.setItem(postById.id, JSON.stringify(post));
+
+    if (posts.length === 0) {
+      posts.push(post);
+      localStorage.setItem("posts", JSON.stringify(posts));
+
+    }
+
+    let check = false;
+    if (posts.length !== 0) {
+      for (let i = 0; i < posts.length; i++) {
+        if (posts[i].id === post.id) {
+          posts[i] = post;
+          check = true;
+          break;
+        }
+      }
+    }
+    if (check) {
+      localStorage.setItem("posts", JSON.stringify(posts));
+    }
+
+    if (!check) {
+      posts.push(post);
+      localStorage.setItem("posts", JSON.stringify(posts));
+    }
+    
+    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem('posts'))))
   };
-  
 
   return (
     <div className={styles.Container}>

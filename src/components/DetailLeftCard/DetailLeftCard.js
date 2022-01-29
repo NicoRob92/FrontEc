@@ -6,7 +6,7 @@ const DetailLeftCard = ({ postById }) => {
       <div className={`card ${styles.product_imgs}`}>
         <div className={styles.img_display}>
           <div className={styles.img_showcase}>
-            <img src={postById.Images} alt={postById.name} />
+            <img src={postById?.Images} alt={postById?.name} />
           </div>
         </div>
         <div className={styles.img_select}>
