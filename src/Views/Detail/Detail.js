@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import DetailLeftCard from "../../components/DetailLeftCard/DetailLeftCard";
 import DetailRightCard from "../../components/DetailRightCard/DetailRightCard";
 import Purchase from "../../components/Purchase/Purchase";
+import Review from "../../components/Review/Review";
+import Card from '@mui/material/Card';
 
 import * as actionsCreators from "../../ducks/actions/actionCreators";
 
@@ -33,13 +35,19 @@ const CardDetail = () => {
     };
     localStorage.setItem(postById.id, JSON.stringify(post));
   };
-  
+
 
   return (
-    <div className={styles.Container}>
-      {postById ? <DetailLeftCard postById={postById} /> : null}
-      {postById ? <DetailRightCard postById={postById} /> : null}
-      {postById ? <Purchase postById={postById} addPostToCart={addPostToCart} /> : null}
+    <div className={styles.container}>
+      <Card className={styles.detail_container}>
+        {postById ? <DetailLeftCard postById={postById} /> : null}
+        {postById ? <DetailRightCard postById={postById} /> : null}
+        {postById ? <Purchase postById={postById} addPostToCart={addPostToCart} /> : null}
+        {/* Review section */}
+      </Card>
+      <Card className={styles.review_container}>
+      <Review ProductId={id} />
+      </Card>
     </div>
   );
 };
