@@ -10,6 +10,7 @@ import Search from "./Views/Search/Search";
 import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
 import Order from "./Views/Order/Order";
+import FormUpdatePost  from "./components/EditPost/FormUpdatePost"
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
@@ -49,6 +50,9 @@ const App = () => {
         </Route>
         <Route exact path="/order">
           <Order/>
+        </Route>
+        <Route exact path="/editpost/:id">
+          <FormUpdatePost/>
         </Route>
       </Switch>
     </>
