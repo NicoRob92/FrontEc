@@ -116,6 +116,7 @@ const ReviewForm = ({ ProductId }) => {
                                 inputRef={valueRef} 
                                 label="Comment"
                                 id="fullWidth"
+                                className={st.input_description}
                             />
                         </Box>
                         {/* button*/}
