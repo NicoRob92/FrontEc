@@ -2,6 +2,7 @@ import { useState } from "react"
 import style from "./Register.module.scss"
 import { NavLink } from "react-router-dom"
 import { connect } from "react-redux"
+import { api } from "../../ducks/actions/actionCreators"
 
 function Register (props){
 
@@ -10,20 +11,17 @@ function Register (props){
 
     const onSubmit = e=>{
 
-        const countryObject = props.countries.find(e=>{
-            return e.name.toLowerCase().includes(data.country.toLowerCase())
-        })
-        console.log(countryObject.name)
+        
         console.log("si")
         e.preventDefault()
-        fetch("http://localhost:4000/api/register", {
+        fetch(api+"register", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
 
-            body: JSON.stringify({...data, country:countryObject.id})
+            body: JSON.stringify(data)
           })
         .then(()=>{
             setData({})
@@ -101,12 +99,13 @@ function Register (props){
                 ></input><br/>
 
             <label>Country</label> <br/>
-
-                <input type="text"
-                name="country" 
-                value={data.country || ""}
-                onChange={e=>handleChange(e)}  
-                ></input><br/>
+               <select name="country" onChange={e=>handleChange(e)}>
+                   <option default >Selecciona </option>
+                   {props.countries?.map((c,i)=>{
+                       return <option key={i} value={c.id}>{c.name}</option>
+                   })}
+               </select>
+                
             <div>
             <button type="submit">Submit</button>
             </div>

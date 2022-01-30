@@ -44,7 +44,7 @@ export function getPostById(id) {
       .then((res) => res.json())
       .then((res) => {
         while (res.Images.length < 5) {
-          res.Images = [...res.Images, faker.image.image(350, 350, true)];
+          res.Images = [...res.Images, {link:faker.image.image(350, 350, true)}];
         }
         return res;
       })
