@@ -2,11 +2,11 @@
 import faker from "faker"
 import * as actionTypes from "./actionTypes"
 
-const api = "http://localhost:4000/api/";
+export const api = "http://localhost:4000/api/";
 
 const getPostsUrl = api + "post";
-const getPostByIdUrl = api + "posts";
-const getCategoriesUrl = api + "category";
+export const getPostByIdUrl = api + "posts";
+export const getCategoriesUrl = api + "category";
 const getUsersUrl = api + "users";
 const getCountriesUrl = api + "countries";
 const Review = api + "admin/review"
