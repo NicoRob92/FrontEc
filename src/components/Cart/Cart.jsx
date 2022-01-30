@@ -4,19 +4,13 @@ import CartItem from "./CartItem";
 
 import styles from "./Cart.module.scss";
 
-const Cart = ({
-  showCart,
-  setShowCart,
-  allPostInCart,
-  removeProduct,
-  incrementQuantity,
-  reduceQuantity,
-}) => {
+const Cart = ({ showCart, setShowCart, cartState, removePost, incrementQuantity, decrementQuantity,}) => {
   const cart = useRef(null);
   useEffect(() => {
     if (!showCart) return cart.current.classList.add(`${styles.closed}`);
     return cart.current.classList.remove(`${styles.closed}`);
   });
+
 
   return (
     <div className={styles.cartContainer}>
@@ -33,18 +27,21 @@ const Cart = ({
           <h1>Tu carrito</h1>
         </div>
         <div className={styles.cartList}>
-          {allPostInCart?.map((item) => (
+          {cartState?.map((post) => (
             <CartItem
-              name={item.name}
-              key={item.id}
-              id={item.id}
-              quantity={item.quantity}
-              reduceQuantity={reduceQuantity}
+              key={post.id}
+              name={post.name}
+              id={post.id}
+              quantity={post.quantity}
+              decrementQuantity={decrementQuantity}
               incrementQuantity={incrementQuantity}
-              removeProduct={removeProduct}
+              removePost={removePost}
             />
           ))}
-          <input type="button" value="Checkout"/>
+          <div>
+            <input type="button" value="Checkout" />
+          </div>
+          
         </div>
       </section>
     </div>
