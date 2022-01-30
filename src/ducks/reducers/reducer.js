@@ -11,6 +11,7 @@ const initialState = {
   filteredPostByCategory: [],
   postById: [],
   orders: [],
+  reviews: []
 };
 
 export default function Product(state = initialState, action) {
@@ -91,8 +92,13 @@ export default function Product(state = initialState, action) {
           : state.orders.filter((e) => e.status === action.payload);
       return {
         ...state,
-        orders: sortedOrder,
-      };
+        orders: sortedOrder
+      }
+    case actionTypes.GET_REVIEW:
+      return{
+        ...state,
+        reviews: action.payload
+      }  
     default:
       return state;
   }
