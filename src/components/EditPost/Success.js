@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link ,Redirect} from "react-router-dom";
 
 const Success = () => {
   return (
     <div className="card container">
       <div className="card-body">
-        <h2 className="card-title">Thank You For Submission</h2>
+        <h2 className="card-title">Acabas De Actualizar Un Producto</h2>
         <p className="card-text">
-          You will get and email confirmation about your product
+          Recibiras un email de confirmación
         </p>
-        
-         <Link to="/">Home</Link>
+
+         <Link className="btn btn-primary" to="/">Home</Link>
       </div>
     </div>
   );

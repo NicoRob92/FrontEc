@@ -7,7 +7,7 @@ import Success from "./Success";
 import validate from "./Validation";
 import {getPostByIdUrl,getCategoriesUrl,api}  from '../../ducks/actions/actionCreators'
 
-import { useParams } from "react-router-dom";
+import { useParams,Redirect } from "react-router-dom";
 
 
 function updatePost(post) {
@@ -53,13 +53,16 @@ export default function FormUpdatePost() {
   });
   let dispatch = useDispatch();
   useEffect(() => {
+
     async function fetchData() {
       // You can await here
       // ...
       let data = await fetch(getPostByIdUrl+"/"+id).then(res=>res.json())
       let allCategories = await fetch(getCategoriesUrl).then(res=>res.json())
       setAllCategories(allCategories)
-
+      if(data.User.username!=localStorage.getItem("username")){
+        setStep(0)
+      }
       setInput({
        ...data,
        title: data.name,
@@ -130,6 +133,12 @@ export default function FormUpdatePost() {
   };
 
   switch (step) {
+    case 0:
+      return(
+
+        <Redirect to={"/detail/"+id}/>
+      )
+
     case 1:
       return (
         <FormProductDetail
