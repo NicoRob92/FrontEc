@@ -14,57 +14,60 @@ const CardDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const postById = useSelector((state) => state.reducer.postById);
+  console.log(postById)
 
   useEffect(() => {
     dispatch(actionCreators.getPostById(id));
   }, [dispatch, id]);
 
   const addPostToCart = () => {
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-    let quantity = Number(document.getElementById("quantity").value);
+    let quantity = document.getElementById("quantity").value;
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || {
+      item: [],
+      id: 1, //falta conseguir id de usuario
+    };
 
     const post = {
       id: postById.id,
-      name: postById.name,
-      price: postById.price,
+      title: postById.name,
       stock: postById.stock,
-      status: postById.status,
-      quantity,
+      description: postById.description,
+      unit_price: parseFloat(postById.price),
+      quantity: Number(quantity)
     };
 
-    if (posts.length === 0) {
-      posts.push(post);
+    if (posts.item.length === 0) {
+      posts.item.push(post);
       localStorage.setItem("posts", JSON.stringify(posts));
-
     }
 
     let check = false;
-    if (posts.length !== 0) {
-      for (let i = 0; i < posts.length; i++) {
-        if (posts[i].id === post.id) {
-          posts[i] = post;
+    if (posts.item.length !== 0) {
+      for (let i = 0; i < posts.item.length; i++) {
+        if (posts.item[i].id === post.id) {
+          posts.item[i] = post;
           check = true;
           break;
         }
       }
     }
-    if (check) {
-      localStorage.setItem("posts", JSON.stringify(posts));
-    }
+    if (check) localStorage.setItem("posts", JSON.stringify(posts));
 
     if (!check) {
-      posts.push(post);
+      posts.item.push(post);
       localStorage.setItem("posts", JSON.stringify(posts));
     }
-    
-    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem('posts'))))
+    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))));
   };
 
   return (
     <div className={styles.Container}>
       {postById ? <DetailLeftCard postById={postById} /> : null}
       {postById ? <DetailRightCard postById={postById} /> : null}
-      {postById ? <Purchase postById={postById} addPostToCart={addPostToCart} /> : null}
+      {postById ? (
+        <Purchase postById={postById} addPostToCart={addPostToCart} />
+      ) : null}
     </div>
   );
 };

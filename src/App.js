@@ -10,17 +10,17 @@ import Search from "./Views/Search/Search";
 import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
 import Order from "./Views/Order/Order";
+import Checkout from "./Views/Checkout/Checkout";
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
 import "./App.css";
 
-
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))))
+    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))));
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
@@ -49,7 +49,10 @@ const App = () => {
           <Search />
         </Route>
         <Route exact path="/order">
-          <Order/>
+          <Order />
+        </Route>
+        <Route exact path="/checkout">
+          <Checkout />
         </Route>
       </Switch>
     </>
