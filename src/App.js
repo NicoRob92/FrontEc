@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import {MercadoPago} from './components/MercadoPago/MercadoPago'
 import Navbar from "./containers/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
@@ -54,10 +53,7 @@ const App = () => {
         </Route>
         <Route exact path="/checkout">
           <Checkout />
-        </Route>
-        <Route exact path="/coso">
-          <MercadoPago/>
-        </Route>
+        </Route>      
         <Route exact path="/editpost/:id">
           <FormUpdatePost/>
         </Route>

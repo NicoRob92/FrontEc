@@ -12,7 +12,7 @@ const Paginate = (props) => {
   return (
     <>
       {pagesToShow.map((e) => (
-        <Page page={e} setPage={props.setPage} />
+        <Page key={e} page={e} setPage={props.setPage} />
       ))}
     </>
   );

@@ -46,6 +46,7 @@ export function getPostById(id) {
         while (res.Images.length < 5) {
           res.Images = [...res.Images, {link:faker.image.image(350, 350, true)}];
         }
+        console.log('hola linea 49')
         return res;
       })
       .then((json) => {
@@ -82,7 +83,7 @@ export function getCountries() {
 
 export function create_post(payload) {
   return async () => {
-    return await fetch(getPostsUrl, {
+    return await fetch('http://localhost:4000/api/admin/post', {
       method: "POST",
       body: payload,
     }).catch((e) => console.error(e));
