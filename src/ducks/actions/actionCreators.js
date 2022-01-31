@@ -1,14 +1,15 @@
 import faker from 'faker';
 import * as actionTypes from './actionTypes';
+import { API } from '../../credentials'
 
-export const api = 'https://api-ec.herokuapp.com/api/';
-
-const getPostsUrl = api + 'post';
+export const api =  API || 'http://localhost:4000/api/'
+const getPostsUrl = api + 'post'
 export const getPostByIdUrl = api + 'posts';
 export const getCategoriesUrl = api + 'category';
 const getUsersUrl = api + 'users';
 const getCountriesUrl = api + 'countries';
 const Review = api + 'admin/review';
+const createPost = api + 'admin/post'
 
 export function getPosts() {
   return function (dispatch) {
@@ -39,7 +40,7 @@ export function getPostByName(name) {
 }
 export function getPostById(id) {
   return function (dispatch) {
-    fetch('http://localhost:4000/api/posts' + '/' + id)
+    fetch(getPostByIdUrl + '/' + id)
       .then((res) => res.json())
       .then((res) => {
         while (res.Images.length < 5) {
@@ -84,7 +85,7 @@ export function getCountries() {
 
 export function create_post(payload, token) {
   return async () => {
-    return await fetch('http://localhost:4000/api/admin/post', {
+    return await fetch(createPost, {
       method: 'POST',
       body: JSON.stringify(payload),
       headers: {
