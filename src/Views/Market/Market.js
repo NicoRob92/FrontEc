@@ -34,11 +34,11 @@ const Market = () => {
       : element?.classList.remove(`${styles.categories}`);
   }, []);
 
-  const totalPages = getPages(postToShow.length, postPerPage);
+  const totalPages = getPages(postToShow?.length, postPerPage);
 
   let toSlice = getPostToShow(currentPage, postPerPage);
 
-  let finalPostToShow = postToShow.slice(toSlice.first, toSlice.last);
+  let finalPostToShow = postToShow?.slice(toSlice.first, toSlice.last);
 
   const setPage = (e) => setCurrentPage((prevState) => (prevState = e.target.value));
 

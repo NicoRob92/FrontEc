@@ -1,6 +1,12 @@
 import axios from 'axios'
 
-export async function login(user) {
+export async function UserLogin(user) {
   const login = await axios.post('http://localhost:4000/api/login', user)
-  return login.data
+  console.log(login.data)
+  if(login.data.msg === 'usuario logueado'){
+    localStorage.setItem('logged', true)
+    return login.data
+  }else{
+    localStorage.setItem('logged', false)
+  }
 }
