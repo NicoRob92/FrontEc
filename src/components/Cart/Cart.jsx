@@ -25,7 +25,7 @@ const Cart = ({
 
   const sendCheckout = () => {
     if (!checkLength) return;
-    fetch("http://localhost:4000/api/checkout", {
+    fetch("https://api-ec.herokuapp.com/api/checkout", {
       method: "POST",
       body: localStorage.getItem("posts"),
       headers: {
