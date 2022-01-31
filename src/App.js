@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-
+import {MercadoPago} from './components/MercadoPago/MercadoPago'
 import Navbar from "./containers/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Market from "./Views/Market/Market";
@@ -11,6 +11,7 @@ import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
 import Order from "./Views/Order/Order";
 import Checkout from "./Views/Checkout/Checkout";
+import FormUpdatePost  from "./components/EditPost/FormUpdatePost"
 
 import * as actionCreators from "./ducks/actions/actionCreators";
 
@@ -53,6 +54,12 @@ const App = () => {
         </Route>
         <Route path="/checkout">
           <Checkout />
+        </Route>
+        <Route exact path="/coso">
+          <MercadoPago/>
+        </Route>
+        <Route exact path="/editpost/:id">
+          <FormUpdatePost/>
         </Route>
       </Switch>
     </>
