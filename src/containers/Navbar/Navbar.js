@@ -15,7 +15,7 @@ const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const cart = useSelector((state) => state.reducer.cart);
-
+  const logged = localStorage.getItem('logged')
 
   const show = () => {
     setShowLogin(!showLogin);
@@ -64,7 +64,7 @@ const Navbar = () => {
         <Searchbar className={styles.searchbar} />
       </div>
       {/* Profile */}
-      {showLogin === false ? (
+      {showLogin === false && !logged ? (
         <div className={styles.container}>
           <button onClick={show}>Login</button>
           <div className={styles.cart}>
