@@ -8,6 +8,8 @@ import Categories from '../../containers/Categories/Categories';
 import styles from './_Search.module.scss';
 import * as actionsCreators from '../../ducks/actions/actionCreators';
 import NotFound from '../../components/NotFound/NotFound';
+import {api}  from '../../ducks/actions/actionCreators'
+
 const Search = () => {
   const { name } = useParams();
   const state = useSelector((state) => state.reducer.categories);
@@ -21,7 +23,7 @@ const Search = () => {
 
   const getPostByName= async () => {
     const arr = await axios.get(
-      `http://localhost:4000/api/post?name=${name}`
+      `${api}post?name=${name}`
     );
     let array = arr.data;
     array.forEach((e) => {

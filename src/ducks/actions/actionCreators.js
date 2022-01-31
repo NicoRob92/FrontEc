@@ -2,7 +2,7 @@
 import faker from "faker"
 import * as actionTypes from "./actionTypes"
 
-export const api = "http://localhost:4000/api/";
+export const api = "https://api-ec.herokuapp.com/api/";
 
 const getPostsUrl = api + "post";
 export const getPostByIdUrl = api + "posts";
@@ -82,7 +82,7 @@ export function getCountries() {
 
 export function create_post(payload) {
   return async () => {
-    return await fetch(getPostsUrl, {
+    return await fetch(api+"admin/post", {
       method: "POST",
       body: payload,
     }).catch((e) => console.error(e));
