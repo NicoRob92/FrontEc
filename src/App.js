@@ -10,6 +10,7 @@ import Search from "./Views/Search/Search";
 import Register from "./Views/Register/Register";
 import FormNewPost from "./components/FormNewPost/FormNewPost";
 import Order from "./Views/Order/Order";
+import Checkout from "./Views/Checkout/Checkout";
 import FormUpdatePost  from "./components/EditPost/FormUpdatePost"
 
 import * as actionCreators from "./ducks/actions/actionCreators";
@@ -20,9 +21,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))))
-
+    dispatch(actionCreators.setCart(JSON.parse(localStorage.getItem("posts"))));
     dispatch(actionCreators.getCategories());
     dispatch(actionCreators.getPosts());
     dispatch(actionCreators.getCountries());
@@ -49,6 +48,12 @@ const App = () => {
         </Route>
         <Route exact path="/search/:name">
           <Search />
+        </Route>
+        <Route exact path="/order">
+          <Order />
+        </Route>
+        <Route exact path="/checkout">
+          <Checkout />
         </Route>
         <Route exact path="/coso">
           <MercadoPago/>

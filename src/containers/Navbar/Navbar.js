@@ -20,10 +20,11 @@ const Navbar = () => {
   const show = () => {
     setShowLogin(!showLogin);
   };
+
   const removePost = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts = posts?.filter((e) => e.id !== Number(id));
+    posts.item = posts?.item?.filter((e) => e.id !== Number(id));
     dispatch(actionCreators.setCart(posts));
     localStorage.setItem("posts", JSON.stringify(posts));
 
@@ -32,7 +33,7 @@ const Navbar = () => {
   const incrementQuantity = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.forEach((e) => {
+    posts.item.forEach((e) => {
       e.id === id && e.stock > e.quantity && e.quantity++;
     });
     dispatch(actionCreators.setCart(posts));
@@ -42,7 +43,7 @@ const Navbar = () => {
   const decrementQuantity = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.forEach((e) => {
+    posts.item.forEach((e) => {
       e.id === id && e.quantity > 1 && e.quantity--;
     });
     dispatch(actionCreators.setCart(posts));
