@@ -15,15 +15,16 @@ const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const cart = useSelector((state) => state.reducer.cart);
-
+  const logged = localStorage.getItem('logged')
 
   const show = () => {
     setShowLogin(!showLogin);
   };
+
   const removePost = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts = posts?.filter((e) => e.id !== Number(id));
+    posts.item = posts?.item?.filter((e) => e.id !== Number(id));
     dispatch(actionCreators.setCart(posts));
     localStorage.setItem("posts", JSON.stringify(posts));
 
@@ -32,7 +33,7 @@ const Navbar = () => {
   const incrementQuantity = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.forEach((e) => {
+    posts.item.forEach((e) => {
       e.id === id && e.stock > e.quantity && e.quantity++;
     });
     dispatch(actionCreators.setCart(posts));
@@ -42,7 +43,7 @@ const Navbar = () => {
   const decrementQuantity = (e) => {
     let id = Number(e.target.id);
     let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.forEach((e) => {
+    posts.item.forEach((e) => {
       e.id === id && e.quantity > 1 && e.quantity--;
     });
     dispatch(actionCreators.setCart(posts));
@@ -58,14 +59,20 @@ const Navbar = () => {
           <h2>Ecommerce</h2>
         </Link>
       </div>
+      <div className={styles.container}>
+        <Link to={"/market"} className={styles.market}>
+          <h4>Market</h4>
+        </Link>
+
+      </div>
       {/* Searchbar */}
       <div className={styles.container}>
         <Searchbar className={styles.searchbar} />
       </div>
       {/* Profile */}
-      {showLogin === false ? (
+      {showLogin === false && !logged ? (
         <div className={styles.container}>
-          <button onClick={show}>Login</button>
+          <button onClick={show} className={styles.login}>Login</button>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>
               <svg
