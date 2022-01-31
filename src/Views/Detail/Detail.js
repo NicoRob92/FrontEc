@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import DetailLeftCard from "../../components/DetailLeftCard/DetailLeftCard";
 import DetailRightCard from "../../components/DetailRightCard/DetailRightCard";
 import Purchase from "../../components/Purchase/Purchase";
@@ -65,7 +64,7 @@ const CardDetail = () => {
   return (
     <div className={styles.container}>
       <Card className={styles.detail_container}>
-        {postById ? <DetailLeftCard postById={postById} /> : null}
+        {postById.Images?.length > 0 ? <DetailLeftCard postById={postById} /> : null}
         {postById ? <DetailRightCard postById={postById} /> : null}
         {postById ? <Purchase postById={postById} addPostToCart={addPostToCart} /> : null}
         {/* Review section */}

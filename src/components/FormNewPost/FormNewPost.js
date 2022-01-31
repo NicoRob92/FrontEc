@@ -9,16 +9,20 @@ import validate from "./Validation";
 
 export default function FormNewPost() {
   const dispatch = useDispatch()
+  const UserId = localStorage.getItem("userId");
+  const Token = localStorage.getItem("token");
+  console.log(Token);
   const [step, setStep] = useState(1)
   const [errors, setErrors] = useState({})
   const [input, setInput] = useState({
-    title: "",
-    categoryId: "",
-    condition: "",
-    stock: "",
-    images: "",
+    name: "",
+    Categories: [],
+    status: false,
+    stock: 0,
+    Images: [],
     description: "",
     price: "",
+    UserId:UserId,
   });
 
   // Proceed to next step
@@ -35,6 +39,24 @@ export default function FormNewPost() {
   const handleChange = (e) => {
     setInput((input) => {
       const { name, value } = e.target
+      if(name === 'Categories'){
+        return{
+          ...input,
+          [name]: [...input.Categories,Number(value)]
+        }
+      }
+      if(name === 'Images'){
+        return{
+          ...input,
+          [name]: [...input.Images,value]
+        }
+      }
+      if(name === 'price'){
+        return{
+          ...input,
+          [name]:Number(value)
+        }
+      }
       return {
         ...input,
         [name]: value,
@@ -49,13 +71,13 @@ export default function FormNewPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(create_post(input))
+    dispatch(create_post(input,Token))
     setInput({
-      title: "",
-      categoryId: "",
-      condition: "",
-      stock: "",
-      images: "",
+      name: "",
+      Categories: [],
+      status: false,
+      stock: 0,
+      Images: [],
       description: "",
       price: "",
     });

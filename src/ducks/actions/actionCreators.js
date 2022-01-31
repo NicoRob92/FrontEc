@@ -1,15 +1,14 @@
+import faker from 'faker';
+import * as actionTypes from './actionTypes';
 
-import faker from "faker"
-import * as actionTypes from "./actionTypes"
+export const api = 'https://api-ec.herokuapp.com/api/';
 
-export const api = "https://api-ec.herokuapp.com/api/";
-
-const getPostsUrl = api + "post";
-export const getPostByIdUrl = api + "posts";
-export const getCategoriesUrl = api + "category";
-const getUsersUrl = api + "users";
-const getCountriesUrl = api + "countries";
-const Review = api + "admin/review"
+const getPostsUrl = api + 'post';
+export const getPostByIdUrl = api + 'posts';
+export const getCategoriesUrl = api + 'category';
+const getUsersUrl = api + 'users';
+const getCountriesUrl = api + 'countries';
+const Review = api + 'admin/review';
 
 export function getPosts() {
   return function (dispatch) {
@@ -25,9 +24,9 @@ export function getPosts() {
   };
 }
 
-export function getPostByName(name){
+export function getPostByName(name) {
   return function (dispatch) {
-    fetch(getPostsUrl + "?name=" + name)
+    fetch(getPostsUrl + '?name=' + name)
       .then((response) => response.json())
       .then((json) => {
         json.forEach((e) => {
@@ -40,13 +39,15 @@ export function getPostByName(name){
 }
 export function getPostById(id) {
   return function (dispatch) {
-    fetch(getPostByIdUrl + "/" + id)
+    fetch('http://localhost:4000/api/posts' + '/' + id)
       .then((res) => res.json())
       .then((res) => {
         while (res.Images.length < 5) {
-          res.Images = [...res.Images, {link:faker.image.image(350, 350, true)}];
+          res.Images = [
+            ...res.Images,
+            { link: faker.image.image(350, 350, true) },
+          ];
         }
-        console.log('hola linea 49')
         return res;
       })
       .then((json) => {
@@ -81,23 +82,27 @@ export function getCountries() {
   };
 }
 
-export function create_post(payload) {
+export function create_post(payload, token) {
   return async () => {
     return await fetch('http://localhost:4000/api/admin/post', {
-      method: "POST",
-      body: payload,
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'token': token,
+      },
     }).catch((e) => console.error(e));
   };
 }
 
-export function chooseCategories(category,info,index) {
-    return {
-        type: actionTypes.CHOOSE_CATEGORIES,
-        payload: category,
-        info,
-        index
-    }
-  }
+export function chooseCategories(category, info, index) {
+  return {
+    type: actionTypes.CHOOSE_CATEGORIES,
+    payload: category,
+    info,
+    index,
+  };
+}
 
 export function resetCategories() {
   return {
@@ -133,23 +138,23 @@ export function getOrders() {
   };
 }
 
-export function filterOrder(payload){
-  return{
+export function filterOrder(payload) {
+  return {
     type: actionTypes.SORT_ORDERS,
-    payload
-  }
+    payload,
+  };
 }
 
-export function postReview(payload){
+export function postReview(payload) {
   return async () => {
     return await fetch(Review, {
-      method: "POST",
+      method: 'POST',
       body: payload,
     }).catch((e) => console.error(e));
   };
 }
 
-export function getReview(PostId){
+export function getReview(PostId) {
   return function (dispatch) {
     return fetch(Review, PostId)
       .then((response) => response.json())

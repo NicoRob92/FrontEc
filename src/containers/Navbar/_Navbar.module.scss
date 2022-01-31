@@ -5,6 +5,7 @@
   display: flex;
   width: 100%;
   height: 7vh;
+  justify-content: space-around;
 }
 
 .container {
@@ -18,8 +19,24 @@
   height: 100%;
   width: auto;
   transition: all 0.4s;
+  margin-left: 5%;
 }
 
+.login{
+  margin-left: 15%;
+  width: 15%;
+  height:40%;
+  font-weight: 600;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 14px;
+  background-color: rgba(30, 215, 96, 1);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  transition: 0.3s;
+}
 .cart {
   width:35%;
   // position: relative;
@@ -34,19 +51,25 @@
   }
 }
 .tittle {
-  width: 100%;
+  width: auto;
   text-decoration: none;
   color: goldenrod;
+  outline:1px solid white;
+  
+}
+.title :focus{
+  text-decoration: none;
+}
+.market{
+  text-decoration: none;
+  color: goldenrod;
+  outline:1px solid white;
 }
 .register {
   width: 15%;
-  height:60%;
+  height:40%;
   font-weight: 600;
-  position: relative;
-  left: 0;
   color: black;
-  padding: 10px 0;
-  width: 90px;
   font-weight: 600;
   text-decoration: none;
   text-align: center;
