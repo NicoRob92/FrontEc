@@ -4,14 +4,14 @@ const initialState = {
   categories: [],
   chosenCategories: [],
   categoryPost: [],
-
   post: [],
-
+  cart: [],
   users: [],
   countries: [],
   filteredPostByCategory: [],
   postById: [],
-  orders: []
+  orders: [],
+  reviews: []
 };
 
 export default function Product(state = initialState, action) {
@@ -33,8 +33,9 @@ export default function Product(state = initialState, action) {
     case actionTypes.GET_CATEGORY_POST:
       return {
         ...state,
-        categoryPost: state.post.filter((post) => post.categoryId === action.payload),
- 
+        categoryPost: state.post.filter(
+          (post) => post.categoryId === action.payload
+        ),
       };
     case actionTypes.GET_POST_BY_ID:
       return {
@@ -74,29 +75,29 @@ export default function Product(state = initialState, action) {
         }),
       };
     case actionTypes.SET_CART:
-      if (action.info === "default") {
-        return {
-          ...state,
-          cart: action.payload,
-        };
-      }
-      if (action.info === "addToCart") {
-        return {
-          ...state,
-          cart: action.payload,
-        };
-      }
+      return {
+        ...state,
+        cart: action.payload,
+      };
     case actionTypes.GET_ORDERS:
-      return{
+      return {
         ...state,
         orders: action.payload,
-      }
+      };
     case actionTypes.SORT_ORDERS:
-        const orders = state.orders
-        const sortedOrder =  action.payload === 'all' ?  orders : state.orders.filter((e) => e.status === action.payload)
-      return{
+      const orders = state.orders;
+      const sortedOrder =
+        action.payload === "all"
+          ? orders
+          : state.orders.filter((e) => e.status === action.payload);
+      return {
         ...state,
         orders: sortedOrder
+      }
+    case actionTypes.GET_REVIEW:
+      return{
+        ...state,
+        reviews: action.payload
       }  
     default:
       return state;

@@ -1,15 +1,15 @@
 
 import faker from "faker"
-import axios from 'axios'
 import * as actionTypes from "./actionTypes"
 
-const api = "http://localhost:4000/api/";
+export const api = "http://localhost:4000/api/";
 
 const getPostsUrl = api + "post";
-const getPostByIdUrl = api + "posts";
-const getCategoriesUrl = api + "category";
+export const getPostByIdUrl = api + "posts";
+export const getCategoriesUrl = api + "category";
 const getUsersUrl = api + "users";
 const getCountriesUrl = api + "countries";
+const Review = api + "admin/review"
 
 export function getPosts() {
   return function (dispatch) {
@@ -44,7 +44,7 @@ export function getPostById(id) {
       .then((res) => res.json())
       .then((res) => {
         while (res.Images.length < 5) {
-          res.Images = [...res.Images, faker.image.image(350, 350, true)];
+          res.Images = [...res.Images, {link:faker.image.image(350, 350, true)}];
         }
         return res;
       })
@@ -104,11 +104,10 @@ export function resetCategories() {
   };
 }
 
-export function setCart(post, info = "default") {
+export function setCart(post) {
   return {
     type: actionTypes.SET_CART,
     payload: post,
-    info,
   };
 }
 
@@ -140,4 +139,22 @@ export function filterOrder(payload){
   }
 }
 
+export function postReview(payload){
+  return async () => {
+    return await fetch(Review, {
+      method: "POST",
+      body: payload,
+    }).catch((e) => console.error(e));
+  };
+}
 
+export function getReview(PostId){
+  return function (dispatch) {
+    return fetch(Review, PostId)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({ type: actionTypes.GET_REVIEW, payload: json });
+      })
+      .catch((e) => console.error(e));
+  };
+}

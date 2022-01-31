@@ -23,7 +23,7 @@ function AdminCategory ({getCategories, categories}){
         .then(()=>{
             setNewCategory("")
 
-        })        
+        })
     }
     const deleteCategory = (e,id)=>{ //borrar categoria
         fetch(`http://localhost:4000/api/admin/category/${id}`, {
@@ -34,7 +34,7 @@ function AdminCategory ({getCategories, categories}){
         }}
         )
     }
-    
+
     return (
         <div>
             <input type="text" placeholder="Create category" value={newCategory} onChange={e=>setNewCategory(e.target.value)}></input>
