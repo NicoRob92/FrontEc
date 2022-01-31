@@ -59,6 +59,12 @@ const Navbar = () => {
           <h2>Ecommerce</h2>
         </Link>
       </div>
+      <div className={styles.container}>
+        <Link to={"/market"} className={styles.market}>
+          <h4>Market</h4>
+        </Link>
+
+      </div>
       {/* Searchbar */}
       <div className={styles.container}>
         <Searchbar className={styles.searchbar} />
@@ -66,7 +72,7 @@ const Navbar = () => {
       {/* Profile */}
       {showLogin === false && !logged ? (
         <div className={styles.container}>
-          <button onClick={show}>Login</button>
+          <button onClick={show} className={styles.login}>Login</button>
           <div className={styles.cart}>
             <button onClick={() => setShowCart(!showCart)}>
               <svg

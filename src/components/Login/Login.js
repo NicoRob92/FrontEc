@@ -24,6 +24,7 @@ export const Login = ({ show, handleUser, setName }) => {
       let loggedUser = {
         username: login.username,
         rol: login.rol,
+        id: login.id
       };
       setName(login.username);
       setToken(login.token);

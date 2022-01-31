@@ -1,5 +1,7 @@
-
+import {useSelector} from 'react-redux'
 const FormProductDescription = ({ nextStep, prevStep, handleChange, handleBlur, input }) => {
+    const category = useSelector((state) => state.reducer.categories)
+    
     const continues = e => {
         e.preventDefault()
         nextStep()
@@ -13,19 +15,17 @@ const FormProductDescription = ({ nextStep, prevStep, handleChange, handleBlur, 
             <form>
                 <div className="mb-3">
                     <label className="form-label">Choose Category</label>
-                    <select className="form-select" name="categoryId" defaultValue={input.categoryId} onBlur={handleBlur} onChange={handleChange}>
-                        <option hidden>Open this select menu</option>
-                        <option /* id of each category */ value="one">One</option>
-                        <option value="two">Two</option>
-                        <option value="three">Three</option>
+                    <select className="form-select" name="Categories" defaultValue={input.Categories} onBlur={handleBlur} onChange={handleChange}>
+                        <option>Select a Category</option>
+                        {category?.map(e=> <option key={e.id} value={e.id}>{e.name}</option>)}
                     </select>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Condition</label>
-                    <select className="form-select" name="condition" defaultValue={input.condition} onBlur={handleBlur} onChange={handleChange}>
+                    <select className="form-select" name="status" defaultValue={input.status} onBlur={handleBlur} onChange={handleChange}>
                         <option hidden>Open this select menu</option>
-                        <option value="new">New</option>
-                        <option value="used">Used</option>
+                        <option key='new' value={true}>New</option>
+                        <option key='Used'value={false}>Used</option>
                     </select>
                 </div>
                 <div className="mb-3">
@@ -35,7 +35,7 @@ const FormProductDescription = ({ nextStep, prevStep, handleChange, handleBlur, 
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Default file input example</label>
-                    <input className="form-control" type="file" name="images" defaultValue={input.images} onBlur={handleBlur} onChange={handleChange} />
+                    <input className="form-control" type="file" name="Images" defaultValue={input.Images} onBlur={handleBlur} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description</label>

@@ -11,9 +11,10 @@ export function deleteToken() {
 }
 
 export function setUsers(user) {
-  const { rol, username } = user;
+  const { rol, username, id} = user;
   localStorage.setItem('rol', rol);
   localStorage.setItem('username', username);
+  localStorage.setItem('userId', id)
 }
 
 export function deleteUser() {
